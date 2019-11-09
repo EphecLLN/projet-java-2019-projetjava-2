@@ -3,13 +3,23 @@ package projetJava;
 public class Etudiant {
 	private String nom;
 	private String prenom;
+	
 	private int idEtu;
 	private Kot infoKot;
+	
 	private static int nbEtudiants;
+	
+	private Tache infoTache;
 	
 	
 	//--------------------------------------CONSTRUCTEURS-------------------------------------------
-	public Etudiant(String nom, String prenom, Kot infoKot) {
+	/**
+	 * Construit un étudiant et incrémente le nombre d'étudiant à chaque création de celui ci
+	 * @param nom
+	 * @param prenom
+	 * @param infoKot : information du kot, nomKot, idKot et le tableau de tout les kots
+	 */
+	public Etudiant(String nom, String prenom, Kot infoKot, Tache infoTache) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.infoKot = infoKot;
@@ -18,6 +28,8 @@ public class Etudiant {
 		
 		//initialiser l'id de l'étudiant
 		this.idEtu = nbEtudiants;
+		
+		this.infoTache = infoTache;
 	}
 	
 	//------------------------------------GETTERS & SETTERS-----------------------------------------
@@ -110,17 +122,30 @@ public class Etudiant {
 		Etudiant.nbEtudiants = nbEtudiants;
 	}
 
+	
+	//---------------------------------------METHODES-------------------------------------------
+	
+	
 
 	//-----------------------------------------MAIN----------------------------------------------
 	public static void main(String[] args) {
 		
-		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"));
-		Etudiant etu2 = new Etudiant("Cotton", "Victor", new Kot(1));
-		Etudiant etu3 = new Etudiant("Castermane", "Florent", new Kot("les shrabs"));
-		Etudiant etu4 = new Etudiant("Du Jardin", "Alex", new Kot("Familly"));
-		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2));
-		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1));
-
+		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"), new Tache());
+		Etudiant etu2 = new Etudiant("Cotton", "Victor", new Kot(1), new Tache());
+		Etudiant etu3 = new Etudiant("Castermane", "Florent", new Kot("les shrabs"), new Tache());
+		Etudiant etu4 = new Etudiant("Du Jardin", "Alex", new Kot("Familly"), new Tache());
+		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2), new Tache());
+		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1), new Tache());
+		
+		etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(11,11,2019));
+		etu1.infoTache.ajouterTache("Faire le ménage", new Date(11,11,2019));
+		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(11,11,2019));
+		
+		System.out.println(etu1.infoTache.tachesRestantes());
+		System.out.println(etu1.infoTache.tempsRestant(1));
+		
+		
+		// TEST AFFICHAGE CONSOLE
 		for(int i = 0; i < etu1.infoKot.allKot.length; i++) {
 			if(etu1.infoKot.allKot[i][0] == null) {
 				break;
@@ -128,6 +153,6 @@ public class Etudiant {
 			System.out.print("Nom du premier Kot : '" +etu1.infoKot.allKot[i][0]);
 			System.out.println("' et son Id : " + etu1.infoKot.allKot[i][1]);
 		}
-		System.out.println(etu5.idEtu);
+		
 	}
 }

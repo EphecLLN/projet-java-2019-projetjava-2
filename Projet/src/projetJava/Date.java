@@ -9,8 +9,21 @@ package projetJava;
  */
 public class Date {
 
-	private String jour;
-	private String mois;
-	private String annee;
+	private int jour;
+	private int mois;
+	private int annee;
+	
+	public Date(int jour, int mois, int annee) {
+		this.jour = jour;
+		this.mois = mois;
+		this.annee = annee;
+	}
+	
+	/**
+	 * @return String : le format de la date sous JJ-MM-YYYY
+	 */
+	public String formatDate() {
+		return this.jour + "-" + this.mois + "-" + this.annee; 
+	}
 	
 }
