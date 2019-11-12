@@ -12,6 +12,7 @@ public class Kot {
 	public static int nombreDeKot;
 	
 	
+	//--------------------------------------CONSTRUCTEURS-------------------------------------------
 	/**
 	 * Constructeur qui créé un nouveau kot sur base de son nom
 	 * @param nomKot
@@ -46,4 +47,8 @@ public class Kot {
 			}
 		}	
 	}
+	
+	
+	//------------------------------------GETTERS & SETTERS-----------------------------------------
+	
 }
