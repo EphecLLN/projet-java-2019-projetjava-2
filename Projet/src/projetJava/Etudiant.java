@@ -1,5 +1,5 @@
 package projetJava;
-
+import java.util.Date;
 public class Etudiant {
 	private String nom;
 	private String prenom;

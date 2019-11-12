@@ -5,7 +5,7 @@ package projetJava;
 
 import java.time.format.DateTimeFormatter;
 import  java.time.LocalDate;
-
+import java.util.Date;
 /**
  * @author robin
  *
@@ -118,7 +118,7 @@ public class Tache {
 	//-----------------------------------------METHODES---------------------------------------------
 	public void ajouterTache(String nomTache, Date dateLimite) {
 		this.allTaches[nbTaches][tbNomTache] = nomTache;
-		this.allTaches[nbTaches][tbDateLimite] = dateLimite.formatDate();
+		this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite);
 		this.allTaches[nbTaches][tbIdTache] = String.valueOf(1 + nbTaches);
 		
 		nbTaches++;
