@@ -28,9 +28,6 @@ public class Tache {
 	public Tache() {
 		
 	}
-	
-	
-	
 	/**
 	 * @param nomTache
 	 * @param dateLimite
