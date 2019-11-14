@@ -3,144 +3,95 @@
  */
 package projetJava;
 
-
 import java.util.Calendar;
 import java.util.Date;
+
 /**
- * @author robin
+ * @author Robin Castermane
  *
  */
 public class Tache {
-	private String [][] allTaches = new String[10][4];
-	private int tbNomTache = 0; //indice 0 du tableau
-	private int tbDateLimite = 1; //indice 1 du tableau
-	private int tbIdTache = 2; //indice 2 du tableau
-	private int tbTacheAccomplie = 3;
+	private String [][] allTaches = new String[10][5]; // tableau contenant toutes les tâches de l'étudiant
+	private int tbNomTache = 0; //indice 0 du tableau, nom de la tâche
+	private int tbGetTime = 1; //indice 1 du tableau, date.getTime() de la dateLimite
+	private int tbDateLimite = 2; //indice 2 du tableau, toString() de la dateLimite
+	private int tbIdTache = 3; //indice 3 du tableau, Id de la tache
+	private int tbTacheAccomplie = 4; // indice 4 du tableau, "NON" ou "OUI" si la tache est accomplie ou pas
 	
-	private String nomTache;
-	private int idTache;
-	private Date dateLimite;
+	// ArrayList<String> = new ArrayList() à venir pour améliorer le code
 	
-	
-	
-	private int nbTaches;
-	
+	private int nbTaches; //nombre de Tache par étudiant
 	
 	//--------------------------------------CONSTRUCTEURS-------------------------------------------
 	public Tache() {
 		
 	}
-	/**
-	 * @param nomTache
-	 * @param dateLimite
-	 */
-	public Tache(String nomTache, Date dateLimite) {
-		this.nomTache = nomTache;
-		this.dateLimite = dateLimite;
-		
-	}
-
 	
 	
 	//------------------------------------GETTERS & SETTERS-----------------------------------------
 	/**
-	 * @return the idTache
-	 */
-	public int getIdTache() {
-		return idTache;
-	}
-
-
-
-	/**
-	 * @param idTache the idTache to set
-	 */
-	public void setIdTache(int idTache) {
-		this.idTache = idTache;
-	}
-
-
-
-	/**
-	 * @return the nomTache
-	 */
-	public String getNomTache() {
-		return nomTache;
-	}
-
-
-
-	/**
-	 * @param nomTache the nomTache to set
-	 */
-	public void setNomTache(String nomTache) {
-		this.nomTache = nomTache;
-	}
-
-
-
-	/**
-	 * @return the dateLimite
-	 */
-	public Date getDateLimite() {
-		return dateLimite;
-	}
-
-
-
-	/**
-	 * @param dateLimite the dateLimite to set
-	 */
-	public void setDateLimite(Date dateLimite) {
-		this.dateLimite = dateLimite;
-	}
-	
-
-
-	/**
-	 * @return the allTaches
+	 * @return le tableau de tout les tâches
 	 */
 	public String[][] getAllTaches() {
 		return allTaches;
 	}
 
-
-
 	/**
-	 * @param allTaches the allTaches to set
+	 * @param allTaches le tableau de tout les tâches à mettre
 	 */
 	public void setAllTaches(String[][] allTaches) {
 		this.allTaches = allTaches;
 	}
-
-
+	
 	/**
-	 * @return
+	 * @return le nombre de taches que l'étudiant a
 	 */
-	public String toString() { // affichage à changer
-		String allTache = "";
+	public int getNbTaches() {
+		return this.nbTaches;
+	}
+	
+	/**
+	 * @param nbTaches, nombre de tâche à mettre
+	 */
+	public void setNbTaches(int nbTaches) {
+		this.nbTaches = nbTaches;
+	}
+	
+	
+	//----------------------------------------TO STRING---------------------------------------------
+	/**
+	 * @return allTache : Un String reprenant toutes les informations des tâches de l'étudiant
+	 */
+	public String toString() {
+		String allTache = "Nom tâche: ";
+		
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
-			allTache += "Taches " + this.allTaches[i][tbIdTache] + ": " + this.allTaches[i][tbNomTache] +
-					", à finir pour le : " + this.allTaches[i][tbDateLimite] + ", Tache accomplie : " +
-					this.allTaches[i][tbTacheAccomplie] + "\n";
+			allTache += this.allTaches[i][tbNomTache] + "\t pour le: " +
+						this.allTaches[i][tbDateLimite] + "\t id: " +
+						this.allTaches[i][tbIdTache] +  "\t tache accomplie: " +
+						this.allTaches[i][tbTacheAccomplie] + "\n";
 		}
 		return allTache;
 	}
 	
+	
 	//-----------------------------------------METHODES---------------------------------------------
 	/**
-	 * @param nomTache
-	 * @param dateLimite
+	 * @param nomTache, nom de la tâche que l'on veut ajouter
+	 * @param dateLimite, dateLimite pour effectuer cette Tâche
 	 */
 	public void ajouterTache(String nomTache, Date dateLimite) {
 		this.allTaches[nbTaches][tbNomTache] = nomTache;
-		this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite.getTime());
+		this.allTaches[nbTaches][tbGetTime] = String.valueOf(dateLimite.getTime());
+		this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite.getDate() + "/" +
+																dateLimite.getMonth() + "/" +
+																dateLimite.getYear());
 		this.allTaches[nbTaches][tbIdTache] = String.valueOf(1 + nbTaches);
 		this.allTaches[nbTaches][tbTacheAccomplie] = "NON";
 		
-		nbTaches++;
-		
+		nbTaches++;	
 	}
+	
 	
 	
 	/**
@@ -148,39 +99,51 @@ public class Tache {
 	 * @param idTache : int
 	 * @return resultat : float, le nombre de jour entre aujourd'hui et la date limite de la tache traitée
 	 */
-	public float tempsRestant(int idTache) { 
-		Calendar cal = Calendar.getInstance();
-
-		Date d1 = new Date(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+	public String tempsRestant(int idTache) { 
+		Calendar cal = Calendar.getInstance(); // Date de ce jour-ci
 		
-		long tempsATraiter = 0;
+		int jourActuel = cal.get(Calendar.YEAR);
+		int moisActuel = cal.get(Calendar.MONTH);
+		int anneeActuel = cal.get(Calendar.DATE);
+		
+		Date dateAjd = new Date(jourActuel, moisActuel, anneeActuel); // Pour avoir le même format
+		
+		long dateATraiter = 0;
 		
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
 			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
-				tempsATraiter = Long.parseLong(this.allTaches[i][tbDateLimite]);
+				dateATraiter = Long.parseLong(this.allTaches[i][tbGetTime]); //prendre le getTime() de la date à traiter
 			}
 		}
-		long diff = tempsATraiter - d1.getTime();
-		float resultat = (diff/(1000*60*60*24));
-	
-		return resultat;
+		
+		long diff = dateATraiter - dateAjd.getTime(); 
+		int resultat = (int)(diff/(1000*60*60*24));
+		return resultat + " jour(s)";
 	}
 	
+	
+	
 	/**
-	 * @param idTache
-	 * @return
+	 * @param idTache : int
+	 * @return true si la tache à été accomplie, sinon false
 	 */
-	public String verifierTacheAccomplie(int idTache) {
+	public Boolean verifierTacheAccomplie(int idTache) {
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
 			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
-				return this.allTaches[i][tbTacheAccomplie];
+				if(this.allTaches[i][tbTacheAccomplie] == "OUI") {
+					return true;
+				}
 			}
 		}
-		return null;
+		return false;
 	}
 	
+	
+	
 	/**
-	 * @param idTache
+	 * Modifie le tableau de la tache, et mets dans celui la valeur de la tache accomplie à : "OUI"
+	 * @param idTache : int
+	 * 
 	 */
 	public void tacheAccomplie(int idTache) {
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
@@ -192,9 +155,4 @@ public class Tache {
 	
 	
 	
-	//------------------------------------------MAIN------------------------------------------------
-
-	public static void main() {
-	
-	}
 }
