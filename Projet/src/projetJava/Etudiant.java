@@ -6,12 +6,10 @@ import java.util.Calendar;
 public class Etudiant {
 	private String nom;
 	private String prenom;
-	
 	private int idEtu;
-	private Kot infoKot;
-	
 	private static int nbEtudiants;
 	
+	private Kot infoKot;
 	private Tache infoTache;
 	
 	
@@ -22,17 +20,16 @@ public class Etudiant {
 	 * @param prenom
 	 * @param infoKot : information du kot, nomKot, idKot et le tableau de tout les kots
 	 */
-	public Etudiant(String nom, String prenom, Kot infoKot, Tache infoTache) {
+	public Etudiant(String nom, String prenom, Kot infoKot) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.infoKot = infoKot;
 		
 		nbEtudiants++;
 		
-		//initialiser l'id de l'étudiant
-		this.idEtu = nbEtudiants;
+		this.idEtu = nbEtudiants;//initialiser l'id de l'étudiant
 		
-		this.infoTache = infoTache;
+		this.infoTache = new Tache(); 
 	}
 	
 	//------------------------------------GETTERS & SETTERS-----------------------------------------
@@ -133,33 +130,29 @@ public class Etudiant {
 	//-----------------------------------------MAIN----------------------------------------------
 	public static void main(String[] args) {
 		
-		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"), new Tache());
+		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"));
+		Etudiant etu2 = new Etudiant("Cotton", "Victor", new Kot(1));
+		Etudiant etu3 = new Etudiant("Castermane", "Florent", new Kot("les shrabs"));
+		Etudiant etu4 = new Etudiant("Du Jardin", "Alex", new Kot("Familly"));
+		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2));
+		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1));
+		
 		etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(2019,10,21));
 		etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019,10,20));
 		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019,10,19));
 
-		System.out.println(etu1.infoTache.tachesRestantes());
+		System.out.println(etu2.infoTache.tachesRestantes());
 		
 		
-		System.out.println(etu1.infoTache.tempsRestant(2));
+		System.out.println(etu1.infoKot);
+		System.out.println(etu2.infoKot);
+		System.out.println(etu3.infoKot);
+		System.out.println(etu4.infoKot);
+		System.out.println(etu5.infoKot);
+		System.out.println(etu6.infoKot);
 					
 		
 		/*
-		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"), new Tache());
-		Etudiant etu2 = new Etudiant("Cotton", "Victor", new Kot(1), new Tache());
-		Etudiant etu3 = new Etudiant("Castermane", "Florent", new Kot("les shrabs"), new Tache());
-		Etudiant etu4 = new Etudiant("Du Jardin", "Alex", new Kot("Familly"), new Tache());
-		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2), new Tache());
-		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1), new Tache());
-		
-		etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(2019,11,21));
-		etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019, 11, 21));
-		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019, 11, 21));
-		
-		System.out.println(etu1.infoTache.tachesRestantes());
-		System.out.println(etu1.infoTache.tempsRestant(1));
-		
-		
 		// TEST AFFICHAGE CONSOLE
 		for(int i = 0; i < etu1.infoKot.allKot.length; i++) {
 			if(etu1.infoKot.allKot[i][0] == null) {
