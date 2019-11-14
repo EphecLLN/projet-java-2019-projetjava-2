@@ -1,6 +1,6 @@
 package projetJava;
 
-import java.util.Date;
+import java.util.Date; // API date
 
 public class Etudiant {
 	private String nom;
