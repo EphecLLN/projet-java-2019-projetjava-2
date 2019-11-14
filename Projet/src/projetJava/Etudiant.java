@@ -140,16 +140,9 @@ public class Etudiant {
 		etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019,10,20));
 		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019,10,19));
 
-		System.out.println(etu2.infoTache.tachesRestantes());
-		
-		
-		System.out.println(etu1.infoKot);
-		System.out.println(etu2.infoKot);
-		System.out.println(etu3.infoKot);
-		System.out.println(etu4.infoKot);
-		System.out.println(etu5.infoKot);
-		System.out.println(etu6.infoKot);
-					
+        System.out.println(etu1.infoTache.tachesRestantes());
+        
+        System.out.println(etu1.infoTache.tempsRestant(3));
 		
 		/*
 		// TEST AFFICHAGE CONSOLE

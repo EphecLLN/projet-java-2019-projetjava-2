@@ -130,11 +130,11 @@ public class Tache {
 	/**
 	 * @return
 	 */
-	public String tachesRestantes() {
+	public String tachesRestantes() { // affichage à changer
 		String allTache = "";
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
-			allTache += "Taches " + this.allTaches[i][tbIdTache] + ": " + this.allTaches[i][tbNomTache] 
-					+ ", à finir pour le : " + this.allTaches[i][tbDateLimite] + "\n";
+			allTache += "Taches " + this.allTaches[i][tbIdTache] + ": " + this.allTaches[i][tbNomTache] + "\n";
+					//+ ", à finir pour le : " + this.allTaches[i][tbDateLimite] + "\n";
 		}
 		return allTache;
 	}
