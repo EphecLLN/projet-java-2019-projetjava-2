@@ -166,6 +166,10 @@ public class Tache {
 		return resultat;
 	}
 	
+	/**
+	 * @param idTache
+	 * @return
+	 */
 	public String verifierTacheAccomplie(int idTache) {
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
 			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
@@ -175,6 +179,9 @@ public class Tache {
 		return null;
 	}
 	
+	/**
+	 * @param idTache
+	 */
 	public void tacheAccomplie(int idTache) {
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
 			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {

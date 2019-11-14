@@ -1,5 +1,12 @@
 package projetJava;
 
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+
+
 /**
  * @author Robin Castermane && Victor Cotton
  *
@@ -13,7 +20,8 @@ public class Kot {
 	
 	private String nomKot;
 	private int idKot;
-	
+	private ArrayList<String> event;
+	private ArrayList<String> note;
 	
 	private static int nombreDeKot;
 	
@@ -28,6 +36,8 @@ public class Kot {
 	public Kot(String nomKot) { // si l'étudiant n'a pas de kot il en crée un (donc nouveau nom)
 		this.nomKot = nomKot;
 		this.idKot = nombreDeKot + 1; 
+		this.event = new ArrayList<String>();
+		this.note = new ArrayList<String>();
 		
 		
 		
@@ -163,5 +173,19 @@ public class Kot {
 		return this.nomKot + " id: " + this.idKot + " nombreEtu: " + this.getNombreEtuParKot();
 	}
 	
+	//-----------------------------------------METHODES-----------------------------------------
 	
+	public void ajouterEvent(String event, Date dateEvent) {
+		this.event.add(event); 
+		
+	}
+	public void supprimerEvent() {
+		
+	}
+	public void retirerToutLesEvent() {
+		
+	}
+	public void ajouterNote(String note, Date dateNote) {
+		this.note.add(note);
+	}
 }
