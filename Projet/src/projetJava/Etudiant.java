@@ -1,5 +1,8 @@
 package projetJava;
+
 import java.util.Date;
+import java.util.Calendar;
+
 public class Etudiant {
 	private String nom;
 	private String prenom;
@@ -131,15 +134,27 @@ public class Etudiant {
 	public static void main(String[] args) {
 		
 		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"), new Tache());
+		etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(2019,10,21));
+		etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019,10,20));
+		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019,10,19));
+
+		System.out.println(etu1.infoTache.tachesRestantes());
+		
+		
+		System.out.println(etu1.infoTache.tempsRestant(2));
+					
+		
+		/*
+		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"), new Tache());
 		Etudiant etu2 = new Etudiant("Cotton", "Victor", new Kot(1), new Tache());
 		Etudiant etu3 = new Etudiant("Castermane", "Florent", new Kot("les shrabs"), new Tache());
 		Etudiant etu4 = new Etudiant("Du Jardin", "Alex", new Kot("Familly"), new Tache());
 		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2), new Tache());
 		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1), new Tache());
 		
-		etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(11,11,2019));
-		etu1.infoTache.ajouterTache("Faire le ménage", new Date(11,11,2019));
-		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(11,11,2019));
+		etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(2019,11,21));
+		etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019, 11, 21));
+		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019, 11, 21));
 		
 		System.out.println(etu1.infoTache.tachesRestantes());
 		System.out.println(etu1.infoTache.tempsRestant(1));
@@ -153,6 +168,6 @@ public class Etudiant {
 			System.out.print("Nom du premier Kot : '" +etu1.infoKot.allKot[i][0]);
 			System.out.println("' et son Id : " + etu1.infoKot.allKot[i][1]);
 		}
-		
+		*/
 	}
 }

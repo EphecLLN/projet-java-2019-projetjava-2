@@ -3,22 +3,23 @@
  */
 package projetJava;
 
-import java.time.format.DateTimeFormatter;
-import  java.time.LocalDate;
+
+import java.util.Calendar;
 import java.util.Date;
 /**
  * @author robin
  *
  */
 public class Tache {
-	private int tbNomTache = 0;
-	private int tbDateLimite = 1;
-	private int tbIdTache = 2;
+	private String [][] allTaches = new String[10][3];
+	private int tbNomTache = 0; //indice 0 du tableau
+	private int tbDateLimite = 1; //indice 1 du tableau
+	private int tbIdTache = 2; //indice 2 du tableau
 	
 	private String nomTache;
 	private int idTache;
 	private Date dateLimite;
-	private String [][] allTaches = new String[10][3];
+	
 	
 	private int nbTaches;
 	
@@ -116,15 +117,22 @@ public class Tache {
 
 	
 	//-----------------------------------------METHODES---------------------------------------------
+	/**
+	 * @param nomTache
+	 * @param dateLimite
+	 */
 	public void ajouterTache(String nomTache, Date dateLimite) {
 		this.allTaches[nbTaches][tbNomTache] = nomTache;
-		this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite);
+		this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite.getTime());
 		this.allTaches[nbTaches][tbIdTache] = String.valueOf(1 + nbTaches);
 		
 		nbTaches++;
 		
 	}
 	
+	/**
+	 * @return
+	 */
 	public String tachesRestantes() {
 		String allTache = "";
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
@@ -134,49 +142,34 @@ public class Tache {
 		return allTache;
 	}
 	
-	public int tempsRestant(int idTache) { // A REFAIRE AVEC UNE CLASS DATE EN STRING 
-		//Et simplifier la méthode
-		int tempsRestant;
-		int jourActuel;
-		int moisActuel;
-		int anneeActuel;
+	/**
+	 *
+	 * @param idTache : int
+	 * @return resultat : float, le nombre de jour entre aujourd'hui et la date limite de la tache traitée
+	 */
+	public float tempsRestant(int idTache) { 
+		Calendar cal = Calendar.getInstance();
+
+		Date d1 = new Date(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
 		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		LocalDate localDate = LocalDate.now();
-		
-		jourActuel = Integer.parseInt(dtf.format(localDate).charAt(0) + "" + 
-				 dtf.format(localDate).charAt(1));
-		moisActuel = Integer.parseInt(dtf.format(localDate).charAt(3) + "" + 
-				 dtf.format(localDate).charAt(4));
-		anneeActuel = Integer.parseInt(dtf.format(localDate).charAt(6) + "" + 
-				 dtf.format(localDate).charAt(7) + "" + 
-				 dtf.format(localDate).charAt(8) + "" + 
-				 dtf.format(localDate).charAt(9));
-		
-		int jourTache = 0;
-		int moisTache = 0;
-		int anneeTache = 0;
+		long tempsATraiter = 0;
 		
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
 			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
-				jourTache = Integer.parseInt(this.allTaches[i][tbDateLimite].charAt(0) + "" +
-						this.allTaches[i][tbDateLimite].charAt(1));
-				moisTache = Integer.parseInt(this.allTaches[i][tbDateLimite].charAt(3) + "" +
-						this.allTaches[i][tbDateLimite].charAt(4));
-				anneeTache = Integer.parseInt(this.allTaches[i][tbDateLimite].charAt(6) + "" +
-						this.allTaches[i][tbDateLimite].charAt(7) + "" + 
-						this.allTaches[i][tbDateLimite].charAt(8) + "" +
-						this.allTaches[i][tbDateLimite].charAt(9));
+				tempsATraiter = Long.parseLong(this.allTaches[i][tbDateLimite]);
 			}
 		}
-		tempsRestant = (anneeTache - anneeActuel)*365 + (moisTache - moisActuel)*30 + (jourTache - jourActuel);
-		return tempsRestant; // retourne le nombre de jour restant pour une tache précise (id en paramètre)
+		long diff = tempsATraiter - d1.getTime();
+		float resultat = (diff/(1000*60*60*24));
+		
+		
+		return resultat;
 	}
 	
 	
 	//------------------------------------------MAIN------------------------------------------------
 
 	public static void main() {
-		
+	
 	}
 }
