@@ -1,5 +1,7 @@
 package projetJava;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Date; // API date
 
 public class Etudiant {
@@ -106,6 +108,23 @@ public class Etudiant {
 
 
 	/**
+	 * @return the infoTache
+	 */
+	public Tache getInfoTache() {
+		return infoTache;
+	}
+
+
+
+	/**
+	 * @param infoTache the infoTache to set
+	 */
+	public void setInfoTache(Tache infoTache) {
+		this.infoTache= infoTache;
+	}
+
+
+	/**
 	 * @return the nbEtudiants
 	 */
 	public static int getNbEtudiants() {
@@ -140,21 +159,6 @@ public class Etudiant {
 		etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019,10,20));
 		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019,10,19));
 
-        System.out.println(etu1.infoTache.tempsRestant(1));
-        
-        System.out.println(etu1.infoKot);
-        
-       // System.out.println(etu1.infoTache.tempsRestant(3));
-		
-		/*
-		// TEST AFFICHAGE CONSOLE
-		for(int i = 0; i < etu1.infoKot.allKot.length; i++) {
-			if(etu1.infoKot.allKot[i][0] == null) {
-				break;
-			}
-			System.out.print("Nom du premier Kot : '" +etu1.infoKot.allKot[i][0]);
-			System.out.println("' et son Id : " + etu1.infoKot.allKot[i][1]);
-		}
-		*/
+  
 	}
 }
