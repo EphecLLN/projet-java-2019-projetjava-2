@@ -11,14 +11,16 @@ import java.util.Date;
  *
  */
 public class Tache {
-	private String [][] allTaches = new String[10][3];
+	private String [][] allTaches = new String[10][4];
 	private int tbNomTache = 0; //indice 0 du tableau
 	private int tbDateLimite = 1; //indice 1 du tableau
 	private int tbIdTache = 2; //indice 2 du tableau
+	private int tbTacheAccomplie = 3;
 	
 	private String nomTache;
 	private int idTache;
 	private Date dateLimite;
+	
 	
 	
 	private int nbTaches;
@@ -112,6 +114,18 @@ public class Tache {
 	}
 
 
+	/**
+	 * @return
+	 */
+	public String toString() { // affichage à changer
+		String allTache = "";
+		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
+			allTache += "Taches " + this.allTaches[i][tbIdTache] + ": " + this.allTaches[i][tbNomTache] +
+					", à finir pour le : " + this.allTaches[i][tbDateLimite] + ", Tache accomplie : " +
+					this.allTaches[i][tbTacheAccomplie] + "\n";
+		}
+		return allTache;
+	}
 	
 	//-----------------------------------------METHODES---------------------------------------------
 	/**
@@ -122,22 +136,12 @@ public class Tache {
 		this.allTaches[nbTaches][tbNomTache] = nomTache;
 		this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite.getTime());
 		this.allTaches[nbTaches][tbIdTache] = String.valueOf(1 + nbTaches);
+		this.allTaches[nbTaches][tbTacheAccomplie] = "NON";
 		
 		nbTaches++;
 		
 	}
 	
-	/**
-	 * @return
-	 */
-	public String tachesRestantes() { // affichage à changer
-		String allTache = "";
-		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
-			allTache += "Taches " + this.allTaches[i][tbIdTache] + ": " + this.allTaches[i][tbNomTache] + "\n";
-					//+ ", à finir pour le : " + this.allTaches[i][tbDateLimite] + "\n";
-		}
-		return allTache;
-	}
 	
 	/**
 	 *
@@ -158,10 +162,27 @@ public class Tache {
 		}
 		long diff = tempsATraiter - d1.getTime();
 		float resultat = (diff/(1000*60*60*24));
-		
-		
+	
 		return resultat;
 	}
+	
+	public String verifierTacheAccomplie(int idTache) {
+		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
+			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
+				return this.allTaches[i][tbTacheAccomplie];
+			}
+		}
+		return null;
+	}
+	
+	public void tacheAccomplie(int idTache) {
+		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
+			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
+				this.allTaches[i][tbTacheAccomplie] = "OUI";
+			}
+		}
+	}
+	
 	
 	
 	//------------------------------------------MAIN------------------------------------------------

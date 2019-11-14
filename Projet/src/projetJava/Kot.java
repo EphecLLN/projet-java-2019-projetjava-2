@@ -13,7 +13,7 @@ public class Kot {
 	
 	private String nomKot;
 	private int idKot;
-	private int nombreEtuParKot ;
+	
 	
 	private static int nombreDeKot;
 	
@@ -28,6 +28,7 @@ public class Kot {
 	public Kot(String nomKot) { // si l'étudiant n'a pas de kot il en crée un (donc nouveau nom)
 		this.nomKot = nomKot;
 		this.idKot = nombreDeKot + 1; 
+		
 		
 		
 		// met les noms des kot dans le tableau all kot à l'indice 0
@@ -55,6 +56,7 @@ public class Kot {
 				
 				this.nomKot = this.allKot[i][tbNomKot];
 				this.idKot = Integer.parseInt(this.allKot[i][tbIdKot]);
+				
 				
 				int nbEtu = Integer.parseInt(this.allKot[i][tbNombreEtu]);
 				nbEtu ++;
@@ -143,6 +145,8 @@ public class Kot {
 	public static void setNombreDeKot(int nombreDeKot) {
 		Kot.nombreDeKot = nombreDeKot;
 	}
+	
+
 	
 	
 	public int getNombreEtuParKot() {
