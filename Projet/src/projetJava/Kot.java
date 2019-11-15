@@ -22,7 +22,7 @@ public class Kot {
 	private int idKot;
 	private static int nombreDeKot;
 	
-	private ArrayList<String> event;
+	protected ArrayList<String> event;
 	
 	//--------------------------------------CONSTRUCTEURS-------------------------------------------
 	/**
@@ -133,6 +133,9 @@ public class Kot {
 	}
 	
 
+	/**
+	 * @return le nombre d'etudiants dans le kot
+	 */
 	public int getNombreEtuParKot() {
 		for(int i = 0; i < allKot.length && allKot[i][tbNomKot] != null; i++) {
 			if(this.idKot == Integer.parseInt(allKot[i][tbIdKot])) {
@@ -140,6 +143,22 @@ public class Kot {
 			}
 		}
 		return 0;
+	}
+	
+
+	/**
+	 * @return the event
+	 */
+	public ArrayList<String> getEvent() {
+		return event;
+	}
+
+
+	/**
+	 * @param event the event to set
+	 */
+	public void setEvent(ArrayList<String> event) {
+		this.event = event;
 	}
 
 	
@@ -172,7 +191,7 @@ public class Kot {
 		}
 	}
 	
-	
+
 	/**
 	 * Methode qui permet de supprimer un evenement 
 	 * Si le kot ne contient pas d'evenements, alors affiche un message en console
