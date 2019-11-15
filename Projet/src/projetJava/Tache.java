@@ -63,10 +63,11 @@ public class Tache {
 	 * @return allTache : Un String reprenant toutes les informations des tâches de l'étudiant
 	 */
 	public String toString() {
-		String allTache = "Nom tâche: ";
+		String allTache = "";
 		
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
-			allTache += this.allTaches[i][tbNomTache] + "\t pour le: " +
+			allTache += "Nom tâche: " +
+						this.allTaches[i][tbNomTache] + "\t pour le: " +
 						this.allTaches[i][tbDateLimite] + "\t id: " +
 						this.allTaches[i][tbIdTache] +  "\t tache accomplie: " +
 						this.allTaches[i][tbTacheAccomplie] + "\n";
@@ -99,7 +100,7 @@ public class Tache {
 	 * @param idTache : int
 	 * @return resultat : float, le nombre de jour entre aujourd'hui et la date limite de la tache traitée
 	 */
-	public String tempsRestant(int idTache) { 
+	public int tempsRestant(int idTache) { 
 		Calendar cal = Calendar.getInstance(); // Date de ce jour-ci
 		
 		int jourActuel = cal.get(Calendar.YEAR);
@@ -119,7 +120,7 @@ public class Tache {
 		long diff = dateATraiter - dateAjd.getTime(); 
 		int resultat = (int)(diff/(1000*60*60*24));
 		
-		return resultat + " jour(s)";
+		return resultat;
 	}
 	
 	
@@ -143,15 +144,24 @@ public class Tache {
 	
 	/**
 	 * Modifie le tableau de la tache, et mets dans celui la valeur de la tache accomplie à : "OUI"
+	
+	/**
 	 * @param idTache : int
-	 * 
+	 * @return true si l'id Tache à bien été trouvé, que la valeur de base était "NON" (accomplie)
+	 * cela modifie donc le tableau de la tache et mets dans celui la valeur de la tache 
+	 * accomplie à : "OUI"
+	 * 		   false si l'id de la Tache n'a pas été trouvé ou qu'elle était déjà accomplie.
 	 */
-	public void tacheAccomplie(int idTache) {
+	public boolean tacheAccomplie(int idTache) {
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
 			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
-				this.allTaches[i][tbTacheAccomplie] = "OUI";
+				if(this.allTaches[i][tbTacheAccomplie] == "NON") {
+					this.allTaches[i][tbTacheAccomplie] = "OUI";
+					return true;
+				}
 			}
 		}
+		return false;
 	}
 	
 	

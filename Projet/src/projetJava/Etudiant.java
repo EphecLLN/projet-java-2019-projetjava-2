@@ -1,7 +1,7 @@
 package projetJava;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Calendar;
 import java.util.Date; // API date
 
 public class Etudiant {
@@ -147,7 +147,6 @@ public class Etudiant {
 
 	//-----------------------------------------MAIN----------------------------------------------
 	public static void main(String[] args) {
-		
 		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"));
 		Etudiant etu2 = new Etudiant("Cotton", "Victor", new Kot(1));
 		Etudiant etu3 = new Etudiant("Castermane", "Florent", new Kot("les shrabs"));
@@ -155,16 +154,11 @@ public class Etudiant {
 		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2));
 		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1));
 		
-		//etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(2019,10,21));
-		//etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019,10,20));
-		//etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019,10,19));
-
-		System.out.println(etu1.getInfoTache().getNbTaches());
+		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019, 10, 28));
+		etu2.getInfoTache().ajouterTache("Passer l'aspirateur", new Date(2019, 10, 28));
+		etu3.getInfoTache().ajouterTache("Ranger le commu", new Date(2019, 10, 28));
+		etu4.getInfoTache().ajouterTache("Nétoyer la salle de bain", new Date(2019, 10, 28));
 		
-		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019,10,21));
-		etu2.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019,10,21));
-		
-		System.out.println(etu1.getInfoTache().getNbTaches());
 
 	}
 	
