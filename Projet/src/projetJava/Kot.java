@@ -23,7 +23,6 @@ public class Kot {
 	private static int nombreDeKot;
 	
 	private ArrayList<String> event;
-	private ArrayList<String> note;
 	
 	//--------------------------------------CONSTRUCTEURS-------------------------------------------
 	/**
@@ -35,7 +34,6 @@ public class Kot {
 		this.nomKot = nomKot;
 		this.idKot = nombreDeKot + 1; 
 		this.event = new ArrayList<String>();
-		this.note = new ArrayList<String>();
 		
 	// met les noms des kot dans le tableau all kot à l'indice 0
 		this.allKot[nombreDeKot][tbNomKot] = nomKot; 
@@ -151,22 +149,41 @@ public class Kot {
 	
 	//-----------------------------------------METHODES-----------------------------------------
 	/**
-	 * Methode qui permet d'ajouter un evenements au calendrier du kot
+	 * Methode qui permet d'ajouter un evenement au calendrier du kot
 	 * @param event : une string decrivant l'evenement souhaite
-	 * @param dateEvent : la date à laquelle celui ci aura lieu, est de type date
 	 */
-	public void ajouterEvent(String event, Date dateEvent) {
-	
+	public void ajouterEvent(String event) {
 		this.event.add(event); 
-		
+	}
+	
+	
+	/**
+	 * Methode qui affiche en console les evenements du kot, ainsi que le numero d'event
+	 * Si le kot ne contient pas d'evenements, alors affiche un message en console
+	 */
+	public void afficherEvent() {
+		if(this.event.size() != 0) {
+			for (int i = 0; i < this.event.size(); i++) {
+				System.out.println(this.event.get(i) + " idEvent: " + i);
+			}
+		}
+		else {
+			System.out.println("Pas d'évènements à afficher");
+		}
 	}
 	
 	
 	/**
 	 * Methode qui permet de supprimer un evenement 
+	 * Si le kot ne contient pas d'evenements, alors affiche un message en console
 	 */
-	public void supprimerEvent() {
-		
+	public void supprimerEvent(int idEvent) {
+		if(this.event.size() != 0) {
+			this.event.remove(idEvent); 
+		}
+		else {
+			System.out.println("Pas d'évènements à supprimer");
+		}
 	}
 	
 	
@@ -174,37 +191,26 @@ public class Kot {
 	 * Methode qui permet de supprimer tous les evenements contenus dans l'arraysList event 
 	 */
 	public void retirerAllEvent() {
-		
+		this.event.clear();
 	}
 	
 	
-	/**
-	 * Methode qui permet d'ajouter une note au calendrier du kot
-	 * @param note
-	 * @param dateNote
-	 */
-	public void ajouterNote(String note, Date dateNote) {
-		this.note.add(note);
-	}
-	
-	
-	/**
-	 * 
-	 */
-	public void retirerNote() {
-		
-	}
-	
-	
-	/**
-	 * 
-	 */
-	public void retirerAllNotes() {
-		
-	}
+
 	//------------------------------------------MAIN------------------------------------------------
 	
 	public static void main(String[] args) {
+		Kot kotTest = new Kot("Kot1"); 
+		Kot kotTest2 = new Kot("Kot2");
+		kotTest.ajouterEvent("souper");
+		kotTest.ajouterEvent("installer wifi");
+		kotTest.afficherEvent();
+		kotTest.supprimerEvent(0);
+		kotTest.afficherEvent();
+		kotTest.retirerAllEvent(); 
+		kotTest.afficherEvent();
+		
+		//kotTest2.ajouterEvent("Annif");
+		//kotTest2.afficherEvent();
 		
 	}
 	
