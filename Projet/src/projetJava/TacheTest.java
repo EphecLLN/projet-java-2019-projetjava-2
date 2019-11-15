@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  * @author robin
@@ -17,7 +20,6 @@ class TacheTest {
 
 	@Test
 	void testAjouterTache() {
-		
 		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"));
 		Etudiant etu2 = new Etudiant("Cotton", "Victor", new Kot(1));
 		
@@ -51,8 +53,22 @@ class TacheTest {
 	@Test
 	void testTempsRestant() {
 		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"));
-		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019,10,21));
-		fail("Not yet implemented");
+		
+		Calendar cal = Calendar.getInstance(); // Date de ce jour-ci
+		int anneeActuel = cal.get(Calendar.YEAR);
+		int moisActuel = cal.get(Calendar.MONTH);
+		int jourActuel = cal.get(Calendar.DATE);
+		//Ceci me permet que le test soit valide tout les jours
+		
+		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(anneeActuel,moisActuel,jourActuel + 5));
+		etu1.getInfoTache().ajouterTache("Passer l'aspirateur", new Date(anneeActuel,moisActuel,jourActuel + 6));
+		etu1.getInfoTache().ajouterTache("Ranger le commu", new Date(anneeActuel,moisActuel,jourActuel + 8));
+		etu1.getInfoTache().ajouterTache("Nétoyer la salle de bain", new Date(anneeActuel,moisActuel,jourActuel + 9));
+		
+		assertEquals(5, etu1.getInfoTache().tempsRestant(1)); //tache 1
+		assertEquals(6, etu1.getInfoTache().tempsRestant(2)); //tache 2
+		assertEquals(8, etu1.getInfoTache().tempsRestant(3)); //tache 3
+		assertEquals(9, etu1.getInfoTache().tempsRestant(4)); //tache 4
 	}
 	
 	
@@ -77,7 +93,16 @@ class TacheTest {
 	@Test
 	void testTacheAccomplie() {
 		Etudiant etu1 = new Etudiant("Castermane", "Robin", new Kot("kot à projet"));
-		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019,10,21));
-		fail("Not yet implemented");
+		
+		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019, 10, 29));
+		etu1.getInfoTache().ajouterTache("Passer l'aspirateur", new Date(2019, 10, 29));
+		etu1.getInfoTache().ajouterTache("Ranger le commu", new Date(2019, 10, 29));
+		
+		assertEquals(true, etu1.getInfoTache().tacheAccomplie(1)); //tache 1
+		assertEquals(false, etu1.getInfoTache().tacheAccomplie(1)); //tache 1
+		assertEquals(true, etu1.getInfoTache().tacheAccomplie(2)); //tache 2
+		assertEquals(false, etu1.getInfoTache().tacheAccomplie(2)); //tache 2
+		assertEquals(true, etu1.getInfoTache().tacheAccomplie(3)); //tache 3
+		assertEquals(false, etu1.getInfoTache().tacheAccomplie(3)); //tache 3
 	}	
 }
