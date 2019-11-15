@@ -118,6 +118,7 @@ public class Tache {
 		
 		long diff = dateATraiter - dateAjd.getTime(); 
 		int resultat = (int)(diff/(1000*60*60*24));
+		
 		return resultat + " jour(s)";
 	}
 	

@@ -155,10 +155,17 @@ public class Etudiant {
 		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2));
 		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1));
 		
-		etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(2019,10,21));
-		etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019,10,20));
-		etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019,10,19));
+		//etu1.infoTache.ajouterTache("Faire la vaiselle", new Date(2019,10,21));
+		//etu1.infoTache.ajouterTache("Faire le ménage", new Date(2019,10,20));
+		//etu1.infoTache.ajouterTache("Passer l'aspi", new Date(2019,10,19));
 
-  
+		System.out.println(etu1.getInfoTache().getNbTaches());
+		
+		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019,10,21));
+		etu2.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019,10,21));
+		
+		System.out.println(etu1.getInfoTache().getNbTaches());
+
 	}
+	
 }
