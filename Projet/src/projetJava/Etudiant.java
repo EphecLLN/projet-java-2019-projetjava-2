@@ -139,11 +139,19 @@ public class Etudiant {
 	public static void setNbEtudiants(int nbEtudiants) {
 		Etudiant.nbEtudiants = nbEtudiants;
 	}
+	
+	
+	public String toString() {
+		return "Etudiant [nom= " + nom + ", prenom= " + prenom + ", id= " + idEtu + ", nomDuKot= " + 
+				this.getInfoKot().getNomKot() + ", TâcheRestante= " + this.getInfoTache().getNbTaches() + "]";
+	}	
 
 	
 	//---------------------------------------METHODES-------------------------------------------
 	
 	
+
+
 
 	//-----------------------------------------MAIN----------------------------------------------
 	public static void main(String[] args) {
@@ -154,12 +162,25 @@ public class Etudiant {
 		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2));
 		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1));
 		
-		etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019, 10, 28));
-		etu2.getInfoTache().ajouterTache("Passer l'aspirateur", new Date(2019, 10, 28));
-		etu3.getInfoTache().ajouterTache("Ranger le commu", new Date(2019, 10, 28));
-		etu4.getInfoTache().ajouterTache("Nétoyer la salle de bain", new Date(2019, 10, 28));
+		try {
+			etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019, 11, 18));
+			etu1.getInfoTache().ajouterTache("Passer l'aspirateur", new Date(2019, 10, 28));
+			etu1.getInfoTache().ajouterTache("Ranger le commu", new Date(2019, 10, 28)); //Méthode void
+			etu1.getInfoTache().ajouterTache("Nétoyer la sdb", new Date(2019, 10, 28)); //Méthode void
+		} catch (DateTempsRestantInvalideException e) {
+		}
 		
-
+		System.out.println(etu1);
+		System.out.println("");
+		System.out.println(etu1.getInfoTache().getNbTaches());
+		System.out.println(etu1.getInfoTache());
+		System.out.println(etu1.getInfoTache().tempsRestant(1));
+		System.out.println("");
+		System.out.println(etu1.getInfoTache().verifierTacheAccomplie(1));
+		etu1.getInfoTache().tacheAccomplie(1);
+		System.out.println(etu1.getInfoTache().verifierTacheAccomplie(1));
+		
+		
 	}
 	
 }

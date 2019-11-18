@@ -81,16 +81,37 @@ public class Tache {
 	 * @param nomTache, nom de la tâche que l'on veut ajouter
 	 * @param dateLimite, dateLimite pour effectuer cette Tâche
 	 */
-	public void ajouterTache(String nomTache, Date dateLimite) {
-		this.allTaches[nbTaches][tbNomTache] = nomTache;
-		this.allTaches[nbTaches][tbGetTime] = String.valueOf(dateLimite.getTime());
-		this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite.getDate() + "/" +
+	public void ajouterTache(String nomTache, Date dateLimite) throws DateTempsRestantInvalideException {
+		boolean test = true;
+		
+		Date ajd = new Date();
+		if(ajd.getYear() + 1900 > dateLimite.getYear()) {
+			test = false;
+			throw new DateTempsRestantInvalideException("année encodé inférieur à cette année-ci:" 
+					+ dateLimite.getYear());
+		}
+		if(ajd.getYear() + 1900 == dateLimite.getYear() && ajd.getMonth() > dateLimite.getMonth()) {
+			test = false;
+			throw new DateTempsRestantInvalideException("mois encodé inférieur à celui de cette année-ci:" 
+					+ dateLimite.getMonth());
+		}
+		if(ajd.getYear() + 1900 == dateLimite.getYear() && ajd.getMonth() == dateLimite.getMonth() &&
+				ajd.getDate() > dateLimite.getDate()) {
+			test = false;
+			throw new DateTempsRestantInvalideException("jours encodé inférieur à celui de cette année-ci:" 
+					+ dateLimite.getDate());
+		}
+		if(test) {
+			this.allTaches[nbTaches][tbNomTache] = nomTache;
+			this.allTaches[nbTaches][tbGetTime] = String.valueOf(dateLimite.getTime());
+			this.allTaches[nbTaches][tbDateLimite] = String.valueOf(dateLimite.getDate() + "/" +
 																dateLimite.getMonth() + "/" +
 																dateLimite.getYear());
-		this.allTaches[nbTaches][tbIdTache] = String.valueOf(1 + nbTaches);
-		this.allTaches[nbTaches][tbTacheAccomplie] = "NON";
+			this.allTaches[nbTaches][tbIdTache] = String.valueOf(1 + nbTaches);
+			this.allTaches[nbTaches][tbTacheAccomplie] = "NON";
 		
-		nbTaches++;	
+			nbTaches++;	
+		}
 	}
 	
 	
@@ -111,16 +132,20 @@ public class Tache {
 		
 		long dateATraiter = 0;
 		
+		boolean test = false;
 		for(int i = 0; i < this.allTaches.length && this.allTaches[i][tbNomTache] != null; i++) {
 			if(idTache == Integer.parseInt(this.allTaches[i][tbIdTache])) {
+				test = true;
 				dateATraiter = Long.parseLong(this.allTaches[i][tbGetTime]); //prendre le getTime() de la date à traiter
 			}
 		}
-		
-		long diff = dateATraiter - dateAjd.getTime(); 
-		int resultat = (int)(diff/(1000*60*60*24));
-		
-		return resultat;
+		if(test) { // Si la tâche n'a pas été créez
+			long diff = dateATraiter - dateAjd.getTime(); 
+			int resultat = (int)(diff/(1000*60*60*24));
+			
+			return resultat;
+		}
+		return 0;
 	}
 	
 	
