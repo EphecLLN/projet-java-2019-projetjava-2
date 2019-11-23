@@ -3,6 +3,7 @@ package projetJava;
 
 import java.util.Calendar;
 import java.util.Date; // API date
+import java.util.Scanner;
 
 public class Etudiant {
 	private String nom;
@@ -162,11 +163,20 @@ public class Etudiant {
 		Etudiant etu5 = new Etudiant("Zuccet", "Alexandra", new Kot(2));
 		Etudiant etu6 = new Etudiant("Du riz", "Deborah", new Kot(1));
 		
+		/*
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Insérer votre nom: ");
+		String nom = sc.nextLine();
+		System.out.print("Insérer votre prénom: ");
+		String prenom = sc.nextLine();
+		
+		System.out.println(nom + " " + prenom);
+		*/
 		try {
 			etu1.getInfoTache().ajouterTache("Faire la vaiselle", new Date(2019, 11, 18));
 			etu1.getInfoTache().ajouterTache("Passer l'aspirateur", new Date(2019, 10, 28));
 			etu1.getInfoTache().ajouterTache("Ranger le commu", new Date(2019, 10, 28)); //Méthode void
-			etu1.getInfoTache().ajouterTache("Nétoyer la sdb", new Date(2019, 10, 28)); //Méthode void
+			etu1.getInfoTache().ajouterTache("Nettoyer la sdb", new Date(2019, 10, 28)); //Méthode void
 		} catch (DateTempsRestantInvalideException e) {
 		}
 		
@@ -176,6 +186,8 @@ public class Etudiant {
 		System.out.println(etu1.getInfoTache());
 		System.out.println(etu1.getInfoTache().tempsRestant(1));
 		System.out.println("");
+		System.out.println(etu1.getInfoTache().tempsRestant(1));
+		
 		System.out.println(etu1.getInfoTache().verifierTacheAccomplie(1));
 		etu1.getInfoTache().tacheAccomplie(1);
 		System.out.println(etu1.getInfoTache().verifierTacheAccomplie(1));
