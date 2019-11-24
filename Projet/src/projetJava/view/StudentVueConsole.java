@@ -9,6 +9,7 @@ import java.util.Scanner;
 import projetJava.DateTempsRestantInvalideException;
 import projetJava.controller.StudentController;
 import projetJava.model.Student;
+import projetJava.model.Task;
 
 public class StudentVueConsole extends StudentVue implements Observer{
 	protected Scanner sc;
@@ -23,7 +24,9 @@ public class StudentVueConsole extends StudentVue implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println(model.getAllTasks());
+		System.out.println(model.getAllStudentsList());
+		Task task = new Task();
+		System.out.println(task.getAllTasksList());
 		printHelp();
 		
 	}
@@ -54,7 +57,7 @@ public class StudentVueConsole extends StudentVue implements Observer{
 		@Override
 		public void run() {
 			while(true) {
-				try {
+				
 					
 					String c = sc.next();
 					if(c.length()!= 1){
@@ -67,8 +70,20 @@ public class StudentVueConsole extends StudentVue implements Observer{
 					if(c.equals(str1)) {
 						System.out.print("Nom de la tâche : ");
 						String taskName = sc.next();
+						System.out.print("Date limtie de la tâche sous le format 'YYYY-MM-DD' : ");
+						String date = sc.next();
 						affiche("");
-						controller.addTask(taskName, new Date(2019, 10, 29));
+						
+						String annee = date.charAt(0) + "" + date.charAt(1) + date.charAt(2) + date.charAt(3);
+						String mois = date.charAt(5) + "" + date.charAt(6);
+						String jour = date.charAt(8) + "" + date.charAt(9);
+						
+						try {
+							controller.addTask(taskName, new Date(Integer.parseInt(annee), Integer.parseInt(mois), Integer.parseInt(jour)));
+						}
+						catch(DateTempsRestantInvalideException e){
+							printHelp();
+						}
 						
 					}
 					
@@ -76,7 +91,7 @@ public class StudentVueConsole extends StudentVue implements Observer{
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
 						affiche("");
-						controller.timeLeft(i);
+						controller.timeLeft(i); // problème il faut faire appel à une tache et pas à un controller
 					}
 					
 					else {
@@ -85,10 +100,8 @@ public class StudentVueConsole extends StudentVue implements Observer{
 						printHelp();
 					}
 					
-				}
-				catch(DateTempsRestantInvalideException e){
-					printHelp();
-				}
+				
+				
 			
 			}
 		}

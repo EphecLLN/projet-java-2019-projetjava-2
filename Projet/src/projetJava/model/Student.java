@@ -18,9 +18,10 @@ public class Student extends Observable{
 	private static int nbrOfStudents;
 	
 	public static List<Student> allStudents = new ArrayList<>();
-	public static List<Task> allTasks = new ArrayList<>();
+	
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
+	public Student () {}
 	public Student(String name){
 		nbrOfStudents ++;
 		
@@ -55,21 +56,18 @@ public class Student extends Observable{
         this.taskList = taskList;
     }
     
-    public String getAllTasks() {
+    public List<Student> getAllStudents(){
+    	return this.allStudents;
+    }
+    
+    public String getAllStudentsList() {
     	String result = "";
-		for(Task t : allTasks) {
-			result +=  t;
-		}
+    	for(Student student : allStudents) {
+    		result += "Etu " + student.getId() + " : " + student.getName() + "\n";
+    	}
     	return result;
     }
     
-    public String getAllStudents() {
-    	String result = "";
-		for(Student t : allStudents) {
-			result +=  t;
-		}
-    	return result;
-    }
 	//--------------------------------------TO STRING----------------------------------------------//
 	@Override
 	public String toString() {
@@ -81,11 +79,12 @@ public class Student extends Observable{
         task.setStudent(this);
         this.getTaskList().add(task);
         
-        allTasks.add(task);
-        
         this.setChanged();
         this.notifyObservers();
     }
+	
+	
+	//Pas utilisé pour le moment
 	public boolean login(int id) {
 		for(Student student : allStudents) {
             if(student.getId() == (id)) { // use equals(id)
@@ -94,29 +93,32 @@ public class Student extends Observable{
         }
 		return false;
 	}
-
+	
+	/*
 	public static void main(String[] args) {
-        Student student1 = new Student("Robin");
-        Student student2 = new Student("Victor");       
-        
+	
+		Student student = new Student("robin");
+		
+	
 		try {
-			Task task = new Task("Faire le ménage", new Date(2019, 10, 25));
-			Task task1 = new Task("Faire la vaiselle", new Date(2019, 10, 26)); //2
-            Task task2 = new Task("passer l'aspirateur", new Date(2019, 10, 27)); //3
-            
-            allTasks.add(task);
-            allTasks.add(task1);
-            allTasks.add(task2); 
-            
-            task.setStudent(student1);
-            task1.setStudent(student1);
-            task2.setStudent(student1);
-            
-            System.out.println(student1.getAllTasks());
-            System.out.println(student1.getAllStudents());
-            
+			Task task1 = new Task("Faire le ménage", new Date(2019, 11, 29));
+			Task task2 = new Task("Faire la vaisselle", new Date(2019, 11, 29));
+			Task task3 = new Task("Passer l'aspirateur", new Date(2019, 11, 29));
+			Task task4 = new Task("Ranger le commu", new Date(2019, 11, 29));
+			
+			try {
+				student.addTask(task1);
+				student.addTask(task2);
+				student.addTask(task3);
+				student.addTask(task4);
+			} catch (DateTempsRestantInvalideException e) {
+			}
+			
 		} catch (projetJava.model.DateTempsRestantInvalideException e) {}
 		
-		
+		Task task = new Task();
+		System.out.println(task.getAllTasks());
+		System.out.println(student.getAllStudents());
     }
+    */
 }

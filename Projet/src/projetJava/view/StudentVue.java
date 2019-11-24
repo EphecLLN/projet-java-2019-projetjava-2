@@ -9,6 +9,7 @@ public abstract class StudentVue implements Observer{
 	
 	protected Student model;
 	protected StudentController controller;
+	//protected StudentController controllerT;
 	
 	StudentVue(Student model, StudentController controller){
 		this.model = model;

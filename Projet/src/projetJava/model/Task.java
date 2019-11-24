@@ -1,8 +1,10 @@
 package projetJava.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Observable;
 
 
@@ -16,6 +18,8 @@ public class Task extends Observable{
 	private boolean accomplished;
 	
 	private static int nbrOfTasks;
+	
+	public static List<Task> allTasks = new ArrayList<>();
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
 	public Task() {
@@ -40,6 +44,8 @@ public class Task extends Observable{
 	        this.student = null;
 	        this.deadline = deadLine;
 	        this.accomplished = false;
+	        
+	        allTasks.add(this);
 	}
 	
 	
@@ -84,6 +90,24 @@ public class Task extends Observable{
 		this.accomplished = accomplished;
 	}
 	
+	public List<Task> getAllTasks(){
+    	return this.allTasks;
+    }
+	
+	public String getAllTasksList() {
+    	String result = "";
+    	for(Task task : allTasks) {
+    		String date = task.deadline.getDate() + "-" + 
+    				task.deadline.getMonth()+ "-" +
+    				task.deadline.getYear();
+    		
+    		result += "Tâche " + task.getId() + " : " + 
+    				task.getName() + "\t etu : " + 
+    				task.getStudent().getName() + "\t pour le : " +
+    				date + "\n";
+    	}
+    	return result;
+    }
 	//--------------------------------------TO STRING----------------------------------------------//
 	@Override
 	public String toString() {

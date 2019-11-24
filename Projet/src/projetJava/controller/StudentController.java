@@ -1,8 +1,6 @@
 package projetJava.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import projetJava.model.DateTempsRestantInvalideException;
 import projetJava.model.Student;
@@ -11,40 +9,48 @@ import projetJava.view.StudentVue;
 
 public class StudentController {
 	
-	private Student model = null; // model = currentStudent
+	private Student currentStudent = null; // model = currentStudent
+	private Task currentTask = null;
+	
 	private StudentVue vue = null; 
 	
-	public StudentController(Student model) {
-		this.model = model;
+	public StudentController(Student currentStudent) {
+		this.currentStudent = currentStudent;
+	}
+	
+	public StudentController(Task currentTask) {
+		this.currentTask = currentTask;
 	}
 	
 	//------------------------------------Method------------------------------------------------//
 	
 	
 	public void addTask(String taskName, Date deadline) throws projetJava.DateTempsRestantInvalideException {
-		if(model != null) {
+		if(currentStudent != null) {
 			
 			try {
 			Task task = new Task(taskName, deadline); //create task
-			this.model.addTask(task); //add task to logged student
+			this.currentStudent.addTask(task); //add task to logged student
 			} 
 			catch (DateTempsRestantInvalideException e){
 			}
 		}
 	}
 	
+	//Pas utilisé pour le moment
 	public boolean login(int id){
-		if(model != null) {
-			return model.login(id);
+		if(currentStudent != null) {
+			return currentStudent.login(id);
 		}
 		return false;
 	}
 
 	public int timeLeft(int taskId) {
-		if(model != null) {
-			for(Task task : model.getTaskList()) {
+		if(currentTask != null) {
+			for(Task task : currentTask.getAllTasks()) {
 				if(task.getId() == (taskId)) {
-					return task.timeLeft();				}
+					return task.timeLeft();				
+				}
 			}
 		}
 		return 0;
