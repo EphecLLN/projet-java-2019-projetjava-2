@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
+import java.util.Scanner;
 
 import projetJava.DateTempsRestantInvalideException;
 
@@ -77,6 +78,7 @@ public class Student extends Observable{
 	//--------------------------------------METHODES-----------------------------------------------//
 	public void addTask(Task task) throws DateTempsRestantInvalideException{
         task.setStudent(this);
+        
         this.getTaskList().add(task);
         
         this.setChanged();
@@ -94,7 +96,7 @@ public class Student extends Observable{
 		return false;
 	}
 	
-	/*
+	
 	public static void main(String[] args) {
 	
 		Student student = new Student("robin");
@@ -116,9 +118,27 @@ public class Student extends Observable{
 			
 		} catch (projetJava.model.DateTempsRestantInvalideException e) {}
 		
-		Task task = new Task();
-		System.out.println(task.getAllTasks());
-		System.out.println(student.getAllStudents());
+		//Task task = new Task();
+		//System.out.println(task.getAllTasks());
+		//System.out.println(student.getAllStudents());
+		
+		
+		
+		 System.out.println("Enter your name:"); 
+	        Scanner scan = new Scanner(System.in);
+	        String name="";
+
+	        name+=scan.nextLine();
+	       // scan.close();
+
+	        System.out.println("Your name is :"+name); 
+	        
+	        
+	        System.out.print("Date limtie de la tâche sous le format 'YYYY-MM-DD' : ");
+	        Scanner sc = new Scanner(System.in);
+			String date = scan.next();
+			System.out.println("date: " + date);
+			
     }
-    */
+    
 }

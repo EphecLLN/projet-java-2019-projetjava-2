@@ -88,6 +88,8 @@ public class Task extends Observable{
 	
 	public void setAccomplished(boolean accomplished) {
 		this.accomplished = accomplished;
+		 this.setChanged();
+	     this.notifyObservers();
 	}
 	
 	public List<Task> getAllTasks(){
@@ -104,7 +106,7 @@ public class Task extends Observable{
     		result += "Tâche " + task.getId() + " : " + 
     				task.getName() + "\t etu : " + 
     				task.getStudent().getName() + "\t pour le : " +
-    				date + "\n";
+    				date + "\t Accomplie: " + this.getAccomplished() + "\n";
     	}
     	return result;
     }
@@ -114,7 +116,8 @@ public class Task extends Observable{
 		String date = this.deadline.getDate() + "-" + 
 					  this.deadline.getMonth()+ "-" +
 					  this.deadline.getYear();
-		return "Task " + getId() + " : " + name + ", student= " + student.getName() + ", deadline= " + date + " \n";
+		return "Task " + getId() + ": " + name + ", student= " + student.getName() + ", deadline= " + date + " \n" +
+					  "Accomplie: " + this.getAccomplished();
 	}
 
 	//--------------------------------------METHODES-----------------------------------------------//
@@ -140,6 +143,7 @@ public class Task extends Observable{
 		
 		this.setChanged();
         this.notifyObservers();
+        
 		return result;
 		
     }

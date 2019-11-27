@@ -45,16 +45,18 @@ public class StudentMVC {
 			new Runnable() {
 				public void run() {
 					
-			        Student student = new Student("Victor"); 
+			        Student student1 = new Student("Victor"); 
+			        Student student2 = new Student ("Florent");
+			        Student student3 = new Student("Julien");
 					
 			        try {
-						Task task = new Task("Faire le ménage", new Date(2019, 10, 25)); //1
-						Task task1 = new Task("Faire la vaiselle", new Date(2019, 10, 26)); //2
-			            Task task2 = new Task("passer l'aspirateur", new Date(2019, 10, 27)); //3
+						Task task = new Task("Faire le ménage", new Date(2019, 11, 25)); //1
+						Task task1 = new Task("Faire la vaiselle", new Date(2019, 11, 26)); //2
+			            Task task2 = new Task("passer l'aspirateur", new Date(2019, 11, 27)); //3
 			            try {
-							student.addTask(task);
-							student.addTask(task1);
-							student.addTask(task2);
+							student1.addTask(task);
+							student1.addTask(task1);
+							student1.addTask(task2);
 						} catch (DateTempsRestantInvalideException e) {		}
 			            
 			            
