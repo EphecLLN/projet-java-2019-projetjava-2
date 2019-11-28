@@ -78,9 +78,9 @@ public class StudentController {
 						
 						this.currentTask = task;
 						test2 = true;
-						System.out.println(this.currentTask);
+						//System.out.println(this.currentTask);
 						this.currentTask.setAccomplished(true);
-						System.out.println(this.currentTask);
+						//System.out.println(this.currentTask);
 						
 						System.out.println("La tâche est désormais accomplie \n");
 					}
