@@ -79,6 +79,7 @@ public class Student extends Observable{
 	public void addTask(Task task) throws DateTempsRestantInvalideException{
         task.setStudent(this);
         
+        
         this.getTaskList().add(task);
         
         this.setChanged();

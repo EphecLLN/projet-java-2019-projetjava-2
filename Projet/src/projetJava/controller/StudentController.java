@@ -31,6 +31,7 @@ public class StudentController {
 			try {
 			Task task = new Task(taskName, deadline); //create task
 			this.currentStudent.addTask(task); //add task to logged student
+			
 			} 
 			catch (DateTempsRestantInvalideException e){
 			}
@@ -49,7 +50,11 @@ public class StudentController {
 		if(currentTask != null) {
 			for(Task task : currentTask.getAllTasks()) {
 				if(task.getId() == (taskId)) {
-					return task.timeLeft();				
+					this.currentTask = task;
+					
+					return this.currentTask.timeLeft();
+					
+					//return task.timeLeft();				
 				}
 			}
 		}
@@ -69,8 +74,14 @@ public class StudentController {
 				if(task.getId() == (id)) {
 					test = true;
 					if(task.getAccomplished() == false) {
+						//System.out.println(this.currentTask.toString());
+						
+						this.currentTask = task;
 						test2 = true;
-						task.setAccomplished(true);
+						System.out.println(this.currentTask);
+						this.currentTask.setAccomplished(true);
+						System.out.println(this.currentTask);
+						
 						System.out.println("La tâche est désormais accomplie \n");
 					}
 				}
@@ -93,4 +104,5 @@ public class StudentController {
 	public void addView(StudentVue vue) {
 		this.vue = vue;
 	}
+	
 }

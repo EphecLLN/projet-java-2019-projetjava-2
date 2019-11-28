@@ -88,8 +88,8 @@ public class Task extends Observable{
 	
 	public void setAccomplished(boolean accomplished) {
 		this.accomplished = accomplished;
-		 this.setChanged();
-	     this.notifyObservers();
+		this.setChanged();
+	    this.notifyObservers(); 
 	}
 	
 	public List<Task> getAllTasks(){
