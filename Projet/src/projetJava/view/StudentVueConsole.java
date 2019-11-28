@@ -14,19 +14,21 @@ import projetJava.model.Task;
 public class StudentVueConsole extends StudentVue implements Observer{
 	protected Scanner sc;
 	
-	public StudentVueConsole(Student model, StudentController controller) {
-		super(model, controller);
+	public StudentVueConsole(Student model, StudentController controller, 
+			Task modelTask, StudentController controllerTask) {
+		super(model, controller, modelTask, controllerTask);
 
 		update(null, null);
 		sc = new Scanner(System.in);
 		new Thread (new ReadInput()).start();
+		
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println(model.getAllStudentsList());
-		Task task = new Task();
-		System.out.println(task.getAllTasksList());
+		
+		System.out.println(modelTask.getAllTasksList());
 		printHelp();
 		
 	}
@@ -100,15 +102,7 @@ public class StudentVueConsole extends StudentVue implements Observer{
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
 						
-						
-						Task task1 = new Task();
-						for(Task task : task1.getAllTasks()) {
-							if(task.getId() == (i)) {
-								System.out.println(task.timeLeft() + " jour(s) \n");				
-							}
-						}
-						
-						//controller.timeLeft(i); // problème il faut faire appel à une tache et pas à un controller
+						System.out.println(controllerTask.timeLeft(i) + " jours(s).");
 					}
 					
 					else if(c.equals(str3)){
@@ -122,6 +116,7 @@ public class StudentVueConsole extends StudentVue implements Observer{
 								if(task.getAccomplished() == false) {
 									task.setAccomplished(true);
 									System.out.println(task.getAccomplished());	
+									
 									update(null,null);
 								}			
 							}

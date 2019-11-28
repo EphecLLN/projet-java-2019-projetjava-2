@@ -83,6 +83,7 @@ public class Student extends Observable{
         
         this.setChanged();
         this.notifyObservers();
+        
     }
 	
 	

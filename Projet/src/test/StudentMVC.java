@@ -19,22 +19,27 @@ public class StudentMVC {
 		//Création du modèle
 		
 		Student model = new Student(name);
+		Task model2 = new Task();
 		
 		//Création des controleurs : une pour chaque vue
 		//Chaque controleurs doit avoir une référence vers le model pour pouvoir le commander
 		
+		StudentController controllerConsoleTask = new StudentController(model2);
+		
 		StudentController controllerConsole = new StudentController(model);
-		StudentController controllerGui = new StudentController(model);
+		//StudentController controllerGui = new StudentController(model);
 		
 		//Création des vues
 		//Chaque vue doit connaître son controleur et avoir une référence vers le modèle pour l'observer
 		
-		StudentVueConsole vueConsole = new StudentVueConsole(model, controllerConsole);
+		StudentVueConsole vueConsole = new StudentVueConsole(model, controllerConsole, model2, controllerConsoleTask);
+		
 		//StudentVueGui --> à venir
 		
 		//On donne la référence à la vue pour chaque controleur
 		
 		controllerConsole.addView(vueConsole);
+		
 		//controlleurGui --> à venir
 	}
 	
