@@ -56,12 +56,38 @@ public class StudentController {
 		return 0;
 	}
 	
-	public Boolean checkIfTaskIsAccomplishedStudent(String taskName) { 
+	public Boolean checkIfTaskIsAccomplishedStudent(int id) { 
 		return true; 
 	}
 	
-	public void accomplishTaskStudent(String taskName) {
+	public void accomplishTaskStudent(int id) {
+		boolean test = false;
+		boolean test2 = false;
 		
+		if(currentTask != null) {
+			for(Task task : currentTask.getAllTasks()) {
+				if(task.getId() == (id)) {
+					test = true;
+					if(task.getAccomplished() == false) {
+						test2 = true;
+						task.setAccomplished(true);
+						System.out.println("La tâche est désormais accomplie \n");
+					}
+				}
+				
+				
+			}
+			if(test) {
+				if(!test2) {
+					System.out.println("La tâche est déjà acccomplie \n");
+				}
+			}
+			else if(!test){
+				System.out.println("La tâche n'existe pas \n");
+			}
+			
+			
+		}
 	}
 	
 	public void addView(StudentVue vue) {

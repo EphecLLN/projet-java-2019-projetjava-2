@@ -27,7 +27,6 @@ public class StudentVueConsole extends StudentVue implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println(model.getAllStudentsList());
-		
 		System.out.println(modelTask.getAllTasksList());
 		printHelp();
 		
@@ -72,12 +71,12 @@ public class StudentVueConsole extends StudentVue implements Observer{
 					String str3 = "D";
 					
 					if(c.equals(str1)) {
-						 System.out.print("Nom de la tâche: "); 
-					        Scanner scan = new Scanner(System.in);
-					        String taskName="";
+						System.out.print("Nom de la tâche: "); 
+					    Scanner scan = new Scanner(System.in);
+					    String taskName="";
 
-					        taskName+=scan.nextLine();
-					        //scan.close();					
+					    taskName+=scan.nextLine();
+					      					
 						
 						
 						System.out.print("Date limtie de la tâche sous le format 'YYYY-MM-DD' : ");
@@ -90,37 +89,34 @@ public class StudentVueConsole extends StudentVue implements Observer{
 						
 						try {
 							controller.addTask(taskName, new Date(Integer.parseInt(annee), Integer.parseInt(mois), Integer.parseInt(jour)));
-							//controller.addTask(taskName, new Date(2019, 11, 28));
 						}
 						catch(DateTempsRestantInvalideException e){
 							printHelp();
 						}
-						
 					}
+					
 					
 					else if(c.equals(str2)) {
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
 						
-						System.out.println(controllerTask.timeLeft(i) + " jours(s).");
+						if(controllerTask.timeLeft(i) > 1) {
+							System.out.println(controllerTask.timeLeft(i) + " jours.");
+						}
+						else {
+							System.out.println(controllerTask.timeLeft(i) + " jour.");
+						}
+						
+						
 					}
+					
 					
 					else if(c.equals(str3)){
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
+						update(null,null);
+						controllerTask.accomplishTaskStudent(i);
 						
-						
-						Task task1 = new Task();
-						for(Task task : task1.getAllTasks()) {
-							if(task.getId() == (i)) {
-								if(task.getAccomplished() == false) {
-									task.setAccomplished(true);
-									System.out.println(task.getAccomplished());	
-									
-									update(null,null);
-								}			
-							}
-						}
 					}
 					
 					else {
