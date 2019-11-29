@@ -41,9 +41,24 @@ public class TaskManagementMVC {
 		//controlleurGui --> à venir
 	}
 	
+	public TaskManagementMVC(int id) {
+		
+		Student currentStudent = null;
+		for(Student s : TaskManagement.getAllStudents()) {
+			if(s.getId() == id) {
+				currentStudent = s;
+			}
+		}
+		
+		TaskManagement model = new TaskManagement(currentStudent);
+		
+		TaskManagementController controllerConsole = new TaskManagementController(model);
+		
+		TaskManagementVueConsole vueConsole = new TaskManagementVueConsole(model, controllerConsole);
+		
+		controllerConsole.addView(vueConsole);
+	}
 	public static void main(String args[]) {
-		//Schedule a job for the event-dispatching thread:
-		//creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(
 			new Runnable() {
 				public void run() {
@@ -55,21 +70,53 @@ public class TaskManagementMVC {
 			        try {
 						Task task = new Task("Faire le ménage", new Date(2019, 11, 25)); //1
 						Task task1 = new Task("Faire la vaiselle", new Date(2019, 11, 26)); //2
-			            Task task2 = new Task("passer l'aspirateur", new Date(2019, 11, 27)); //3
+			            Task task2 = new Task("Passer l'aspirateur", new Date(2019, 11, 27)); //3
+			            Task task3 = new Task("Ranger le commu", new Date(2019, 11, 26)); //4
 			            try {
 							student1.addTask(task);
 							student2.addTask(task1);
 							student3.addTask(task2);
+							student3.addTask(task3);
 						} catch (DateTempsRestantInvalideException e) {		}
 			            
 			            
 					} catch (projetJava.model.DateTempsRestantInvalideException e) {	}
 			        
-					Scanner sc = new Scanner(System.in);
-					System.out.print("Insérez votre nom : ");
-					String name = sc.next();
-					
-					new TaskManagementMVC(name);
+			        
+			        boolean test = false;
+					while(!test) {
+						
+						Scanner sc = new Scanner(System.in);
+						System.out.println("Pour se connecter tappez : C ");
+						System.out.println("Pour s'inscrire tappez : I ");
+						String carac = sc.next();
+						
+						
+				        String StudentName = "";
+						
+						if(carac.equals("C")) {
+							System.out.println(TaskManagement.getAllStudents());
+							System.out.print("insérez votre ID : ");
+							int id = sc.nextInt();
+							
+							TaskManagement s = new TaskManagement();
+							if(s.login(id)) {
+								new TaskManagementMVC(id);
+								test = true;
+							}
+						}
+						else if(carac.equals("I")){
+							System.out.println("insérez votre nom : ");
+							StudentName = sc.next();
+							new TaskManagementMVC(StudentName);
+							test = true;
+						}
+						else{
+							System.out.println("Erreur d'input réessayez \n");
+						}
+						
+						
+					}
 				}
 
 			}
