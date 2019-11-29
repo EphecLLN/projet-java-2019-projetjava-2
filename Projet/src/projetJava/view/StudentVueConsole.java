@@ -79,16 +79,16 @@ public class StudentVueConsole extends StudentVue implements Observer{
 					      					
 						
 						
-						System.out.print("Date limtie de la tâche sous le format 'YYYY-MM-DD' : ");
+						System.out.print("Date limtie de la tâche sous le format 'DD-MM-YYYY' : ");
 						String date = scan.next();
 						affiche("");
 						
-						String annee = date.charAt(0) + "" + date.charAt(1) + date.charAt(2) + date.charAt(3);
-						String mois = date.charAt(5) + "" + date.charAt(6);
-						String jour = date.charAt(8) + "" + date.charAt(9);
+						String annee = date.charAt(6) + "" + date.charAt(7) + date.charAt(8) + date.charAt(9);
+						String mois = date.charAt(3) + "" + date.charAt(4);
+						String jour = date.charAt(0) + "" + date.charAt(1);
 						
 						try {
-							controller.addTask(taskName, new Date(Integer.parseInt(annee), Integer.parseInt(mois), Integer.parseInt(jour)));
+							controller.addTask(taskName, new Date(Integer.parseInt(annee), Integer.parseInt(mois) -1, Integer.parseInt(jour)));
 						}
 						catch(DateTempsRestantInvalideException e){
 							printHelp();
@@ -100,11 +100,14 @@ public class StudentVueConsole extends StudentVue implements Observer{
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
 						
-						if(controllerTask.timeLeft(i) > 1) {
-							System.out.println(controllerTask.timeLeft(i) + " jours.");
+						if(controllerTask.timeLeft(i) == -1) {
+							System.out.println("La tâche n'existe pas.");
+						}
+						else if(controllerTask.timeLeft(i) > 1) {
+							System.out.println("Temps restant : " + controllerTask.timeLeft(i) + " jours.");
 						}
 						else {
-							System.out.println(controllerTask.timeLeft(i) + " jour.");
+							System.out.println("Temps restant : " + controllerTask.timeLeft(i) + " jour.");
 						}
 						
 						
@@ -114,9 +117,9 @@ public class StudentVueConsole extends StudentVue implements Observer{
 					else if(c.equals(str3)){
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
-						update(null,null);
-						controllerTask.accomplishTaskStudent(i);
 						
+						controllerTask.accomplishTaskStudent(i);
+						update(null, null);
 					}
 					
 					else {

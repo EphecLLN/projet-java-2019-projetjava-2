@@ -30,12 +30,15 @@ public class Task extends Observable{
 		
 		Date ajd = new Date();
 		 if(ajd.getYear() + 1900 > deadLine.getYear()) {
+			 nbrOfTasks --;
 	            throw new DateTempsRestantInvalideException("année encodé inférieur à cette année-ci:" + deadLine.getYear());
 	        }
 	        if(ajd.getYear() + 1900 == deadLine.getYear() && ajd.getMonth() > deadLine.getMonth()) {
+	        	nbrOfTasks --;
 	            throw new DateTempsRestantInvalideException("mois encodé inférieur à celui de cette année-ci:" + deadLine.getMonth());
 	        }
 	        if(ajd.getYear() + 1900 == deadLine.getYear() && ajd.getMonth() == deadLine.getMonth() && ajd.getDate() > deadLine.getDate()) {
+	        	nbrOfTasks --;
 	            throw new DateTempsRestantInvalideException("jours encodé inférieur à celui de cette année-ci:" + deadLine.getDate());
 	        }
 	        
@@ -100,7 +103,7 @@ public class Task extends Observable{
     	String result = "";
     	for(Task task : allTasks) {
     		String date = task.deadline.getDate() + "-" + 
-    				task.deadline.getMonth()+ "-" +
+    				(task.deadline.getMonth()+ 1) + "-" +
     				task.deadline.getYear();
     		
     		result += "Tâche " + task.getId() + " : " + 

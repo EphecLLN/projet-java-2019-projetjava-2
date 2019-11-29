@@ -60,8 +60,8 @@ public class StudentMVC {
 			            Task task2 = new Task("passer l'aspirateur", new Date(2019, 11, 27)); //3
 			            try {
 							student1.addTask(task);
-							student1.addTask(task1);
-							student1.addTask(task2);
+							student2.addTask(task1);
+							student3.addTask(task2);
 						} catch (DateTempsRestantInvalideException e) {		}
 			            
 			            

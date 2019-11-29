@@ -1,6 +1,8 @@
 package projetJava.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import projetJava.model.DateTempsRestantInvalideException;
 import projetJava.model.Student;
@@ -8,6 +10,8 @@ import projetJava.model.Task;
 import projetJava.view.StudentVue;
 
 public class StudentController {
+	
+	//public static List<Task> allTasks = new ArrayList<>();
 	
 	private Student currentStudent = null; // model = currentStudent
 	private Task currentTask = null;
@@ -47,18 +51,21 @@ public class StudentController {
 	}
 
 	public int timeLeft(int taskId) {
+		
 		if(currentTask != null) {
+			
+			
 			for(Task task : currentTask.getAllTasks()) {
 				if(task.getId() == (taskId)) {
 					this.currentTask = task;
 					
 					return this.currentTask.timeLeft();
 					
-					//return task.timeLeft();				
+								
 				}
 			}
 		}
-		return 0;
+		return -1;
 	}
 	
 	public Boolean checkIfTaskIsAccomplishedStudent(int id) { 
@@ -74,15 +81,15 @@ public class StudentController {
 				if(task.getId() == (id)) {
 					test = true;
 					if(task.getAccomplished() == false) {
-						//System.out.println(this.currentTask.toString());
 						
+						//task.setAccomplished(true);
 						this.currentTask = task;
+						currentTask.setAccomplished(true);
 						test2 = true;
-						//System.out.println(this.currentTask);
-						this.currentTask.setAccomplished(true);
-						//System.out.println(this.currentTask);
 						
-						System.out.println("La tâche est désormais accomplie \n");
+						
+						System.out.println("La tâche " + id + " est désormais accomplie \n");
+						
 					}
 				}
 				
