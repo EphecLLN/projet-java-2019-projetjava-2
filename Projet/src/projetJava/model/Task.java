@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
 
-
-
-public class Task extends Observable{
+public class Task{
 
 	private int id;
 	private String name;
@@ -19,7 +16,7 @@ public class Task extends Observable{
 	
 	private static int nbrOfTasks;
 	
-	public static List<Task> allTasks = new ArrayList<>();
+
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
 	public Task() {
@@ -48,7 +45,7 @@ public class Task extends Observable{
 	        this.deadline = deadLine;
 	        this.accomplished = false;
 	        
-	        allTasks.add(this);
+	        
 	}
 	
 	
@@ -91,36 +88,17 @@ public class Task extends Observable{
 	
 	public void setAccomplished(boolean accomplished) {
 		this.accomplished = accomplished;
-		this.setChanged();
-	    this.notifyObservers(); 
 	}
 	
-	public List<Task> getAllTasks(){
-    	return this.allTasks;
-    }
 	
-	public String getAllTasksList() {
-    	String result = "";
-    	for(Task task : allTasks) {
-    		String date = task.deadline.getDate() + "-" + 
-    				(task.deadline.getMonth()+ 1) + "-" +
-    				task.deadline.getYear();
-    		
-    		result += "Tâche " + task.getId() + " : " + 
-    				task.getName() + "\t etu : " + 
-    				task.getStudent().getName() + "\t pour le : " +
-    				date + "\t Accomplie: " + this.getAccomplished() + "\n";
-    	}
-    	return result;
-    }
 	//--------------------------------------TO STRING----------------------------------------------//
 	@Override
 	public String toString() {
 		String date = this.deadline.getDate() + "-" + 
 					  this.deadline.getMonth()+ "-" +
 					  this.deadline.getYear();
-		return "Task " + getId() + ": " + name + ", student= " + student.getName() + ", deadline= " + date + " \n" +
-					  "Accomplie: " + this.getAccomplished();
+		return "Task " + getId() + ": " + name + "\t student= " + student.getName() + "\t deadline= " + date +
+					  " \tAccomplie: " + this.getAccomplished() + "\n";
 	}
 
 	//--------------------------------------METHODES-----------------------------------------------//
@@ -144,9 +122,6 @@ public class Task extends Observable{
 		long difference = dateToCalculate - today.getTime();
 		int result = (int)(difference/(1000*60*60*24));
 		
-		this.setChanged();
-        this.notifyObservers();
-        
 		return result;
 		
     }

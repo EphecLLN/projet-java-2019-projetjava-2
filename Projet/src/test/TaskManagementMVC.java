@@ -4,35 +4,33 @@ import java.util.Date;
 import java.util.Scanner;
 
 import projetJava.DateTempsRestantInvalideException;
-import projetJava.controller.StudentController;
+import projetJava.controller.TaskManagementController;
 import projetJava.model.Student;
 import projetJava.model.Task;
-import projetJava.view.StudentVueConsole;
+import projetJava.model.TaskManagement;
+import projetJava.view.TaskManagementVueConsole;
 
 
-public class StudentMVC {
+public class TaskManagementMVC {
 
-	public Student StudentMVC;
-	public Task TaskMVC;
+	public TaskManagement TaskManagementMVC;
 	
-	public StudentMVC(String name) {
+	public TaskManagementMVC(String name) {
 		//Création du modèle
 		
-		Student model = new Student(name);
-		Task model2 = new Task();
+		Student currentStudent = new Student(name);
+		TaskManagement model = new TaskManagement(currentStudent);
 		
 		//Création des controleurs : une pour chaque vue
 		//Chaque controleurs doit avoir une référence vers le model pour pouvoir le commander
 		
-		StudentController controllerConsoleTask = new StudentController(model2);
-		
-		StudentController controllerConsole = new StudentController(model);
+		TaskManagementController controllerConsole = new TaskManagementController(model);
 		//StudentController controllerGui = new StudentController(model);
 		
 		//Création des vues
 		//Chaque vue doit connaître son controleur et avoir une référence vers le modèle pour l'observer
 		
-		StudentVueConsole vueConsole = new StudentVueConsole(model, controllerConsole, model2, controllerConsoleTask);
+		TaskManagementVueConsole vueConsole = new TaskManagementVueConsole(model, controllerConsole);
 		
 		//StudentVueGui --> à venir
 		
@@ -71,7 +69,7 @@ public class StudentMVC {
 					System.out.print("Insérez votre nom : ");
 					String name = sc.next();
 					
-					new StudentMVC(name);
+					new TaskManagementMVC(name);
 				}
 
 			}

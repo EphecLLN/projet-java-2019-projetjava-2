@@ -7,16 +7,16 @@ import java.util.Observer;
 import java.util.Scanner;
 
 import projetJava.DateTempsRestantInvalideException;
-import projetJava.controller.StudentController;
+import projetJava.controller.TaskManagementController;
 import projetJava.model.Student;
 import projetJava.model.Task;
+import projetJava.model.TaskManagement;
 
-public class StudentVueConsole extends StudentVue implements Observer{
+public class TaskManagementVueConsole extends TaskManagementVue implements Observer{
 	protected Scanner sc;
 	
-	public StudentVueConsole(Student model, StudentController controller, 
-			Task modelTask, StudentController controllerTask) {
-		super(model, controller, modelTask, controllerTask);
+	public TaskManagementVueConsole(TaskManagement model, TaskManagementController controller) {
+		super(model, controller);
 
 		update(null, null);
 		sc = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class StudentVueConsole extends StudentVue implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println(model.getAllStudentsList());
-		System.out.println(modelTask.getAllTasksList());
+		System.out.println(model.getAllTasksList());
 		printHelp();
 		
 	}
@@ -100,14 +100,14 @@ public class StudentVueConsole extends StudentVue implements Observer{
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
 						
-						if(controllerTask.timeLeft(i) == -1) {
+						if(controller.timeLeft(i) == -1) {
 							System.out.println("La tâche n'existe pas.");
 						}
-						else if(controllerTask.timeLeft(i) > 1) {
-							System.out.println("Temps restant : " + controllerTask.timeLeft(i) + " jours.");
+						else if(controller.timeLeft(i) > 1) {
+							System.out.println("Temps restant : " + controller.timeLeft(i) + " jours.");
 						}
 						else {
-							System.out.println("Temps restant : " + controllerTask.timeLeft(i) + " jour.");
+							System.out.println("Temps restant : " + controller.timeLeft(i) + " jour.");
 						}
 						
 						
@@ -118,7 +118,7 @@ public class StudentVueConsole extends StudentVue implements Observer{
 						System.out.print("Numéro de la tâche : ");
 						int i = sc.nextInt();
 						
-						controllerTask.accomplishTaskStudent(i);
+						controller.accomplishTaskStudent(i);
 						update(null, null);
 					}
 					
