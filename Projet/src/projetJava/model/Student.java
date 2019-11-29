@@ -7,8 +7,6 @@ public class Student{
 	private int id;
 	private String name;
 	
-	private TaskManagement taskManagement;
-	
 	private static int nbrOfStudents;
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
@@ -18,7 +16,6 @@ public class Student{
 		
 		this.id = nbrOfStudents;
 		this.name = name;
-		
 		TaskManagement.getAllStudents().add(this);
 	}
 	
@@ -48,18 +45,7 @@ public class Student{
 	//--------------------------------------METHODES-----------------------------------------------//
 	public void addTask(Task task) throws DateTempsRestantInvalideException{
         task.setStudent(this);
-        taskManagement.getAllTasks().add(task);
+        TaskManagement.getAllTasks().add(task);
        
     }
-	
-	
-	//Pas utilisé pour le moment
-	public boolean login(int id) {
-		for(Student student : taskManagement.getAllStudents()) {
-            if(student.getId() == (id)) { // use equals(id)
-                return true;
-            }
-        }
-		return false;
-	}
 }

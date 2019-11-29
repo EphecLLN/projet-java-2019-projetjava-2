@@ -81,7 +81,16 @@ public class TaskManagement extends Observable {
 	}
 	public void setAccomplished(boolean accomplished) {
 		currentTask.setAccomplished(accomplished);
-		this.setChanged();
-        this.notifyObservers();
+		//this.setChanged();
+        //this.notifyObservers();
+	}
+	//Pas utilisé pour le moment
+	public boolean login(int id) {
+		for(Student student : TaskManagement.getAllStudents()) {
+            if(student.getId() == (id)) { // use equals(id)
+                return true;
+            }
+        }
+		return false;
 	}
 }

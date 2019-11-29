@@ -1,11 +1,8 @@
 package projetJava.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import projetJava.model.DateTempsRestantInvalideException;
-import projetJava.model.Student;
 import projetJava.model.Task;
 import projetJava.model.TaskManagement;
 import projetJava.view.TaskManagementVue;
@@ -24,7 +21,6 @@ public class TaskManagementController {
 	
 	public void addTask(String taskName, Date deadline) throws projetJava.DateTempsRestantInvalideException {
 		if(model != null) {
-			
 			try {
 			Task task = new Task(taskName, deadline); //create task
 			this.model.addTask(task); //add task to logged student
@@ -35,20 +31,17 @@ public class TaskManagementController {
 		}
 	}
 
+	
 	public int timeLeft(int taskId) {
 		if(model != null) {
-			for(Task task : model.getAllTasks()) {
+			for(Task task : TaskManagement.getAllTasks()) {
 				if(task.getId() == (taskId)) {
 					this.model.setCurrentTask(task);
 					return this.model.getCurrentTask().timeLeft();
 				}
 			}
 		}
-		return -1;
-	}
-	
-	public Boolean checkIfTaskIsAccomplishedStudent(int id) { 
-		return true; 
+		return -1; //Dans le cas ou la tâche n'a pas été trouvé 
 	}
 	
 	public void accomplishTaskStudent(int id) {
@@ -56,23 +49,16 @@ public class TaskManagementController {
 		boolean test2 = false;
 		
 		if(model != null) {
-			for(Task task : model.getAllTasks()) {
+			for(Task task : TaskManagement.getAllTasks()) {
 				if(task.getId() == (id)) {
 					test = true;
 					if(task.getAccomplished() == false) {
-						
-						//task.setAccomplished(true);
 						this.model.setCurrentTask(task);
 						model.getCurrentTask().setAccomplished(true);
 						test2 = true;
-						
-						
 						System.out.println("La tâche " + id + " est désormais accomplie \n");
-						
 					}
 				}
-				
-				
 			}
 			if(test) {
 				if(!test2) {
@@ -82,11 +68,9 @@ public class TaskManagementController {
 			else if(!test){
 				System.out.println("La tâche n'existe pas \n");
 			}
-			
-			
 		}
 	}
-	/*
+	
 	//Pas utilisé pour le moment
 		public boolean login(int id){
 			if(model != null) {
@@ -94,7 +78,7 @@ public class TaskManagementController {
 			}
 			return false;
 		}
-	*/
+	
 	public void addView(TaskManagementVue vue) {
 		this.vue = vue;
 	}
