@@ -60,7 +60,6 @@ public class TaskManagementVueConsole extends TaskManagementVue implements Obser
 		public void run() {
 			while(true) {
 				
-				
 					String c = sc.next();
 					if(c.length()!= 1){
 						affiche("Format d'input incorrect");
