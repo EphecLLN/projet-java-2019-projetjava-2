@@ -11,7 +11,7 @@ import projetJava.model.TaskManagement;
 import projetJava.view.TaskManagementVueConsole;
 
 
-public class TaskManagementMVC {
+public class TaskManagementMVC { 
 
 	public TaskManagement TaskManagementMVC;
 	
@@ -41,6 +41,23 @@ public class TaskManagementMVC {
 		//controlleurGui --> à venir
 	}
 	
+	public TaskManagementMVC(int id) {
+		
+		Student currentStudent = null;
+		for(Student s : TaskManagement.getAllStudents()) {
+			if(s.getId() == id) {
+				currentStudent = s;
+			}
+		}
+		
+		TaskManagement model = new TaskManagement(currentStudent);
+		
+		TaskManagementController controllerConsole = new TaskManagementController(model);
+		
+		TaskManagementVueConsole vueConsole = new TaskManagementVueConsole(model, controllerConsole);
+		
+		controllerConsole.addView(vueConsole);
+	}
 	public static void main(String args[]) {
 		//Schedule a job for the event-dispatching thread:
 		//creating and showing this application's GUI.
@@ -66,13 +83,42 @@ public class TaskManagementMVC {
 			            
 			            
 					} catch (projetJava.model.DateTempsRestantInvalideException e) {	}
-		
-			        Scanner sc = new Scanner(System.in); 
-					System.out.print("Insérez votre nom : ");
-					String name = sc.next();
-					
-					new TaskManagementMVC(name);
 			        
+			        
+			        boolean test = false;
+					while(!test) {
+						
+						Scanner sc = new Scanner(System.in);
+						System.out.println("Pour se connecter tappez : C ");
+						System.out.println("Pour s'inscrire tappez : I ");
+						String carac = sc.next();
+						
+						
+				        String StudentName = "";
+						
+						if(carac.equals("C")) {
+							System.out.println(TaskManagement.getAllStudents());
+							System.out.print("insérez votre ID : ");
+							int id = sc.nextInt();
+							
+							TaskManagement s = new TaskManagement();
+							if(s.login(id)) {
+								new TaskManagementMVC(id);
+								test = true;
+							}
+						}
+						else if(carac.equals("I")){
+							System.out.println("insérez votre nom : ");
+							StudentName = sc.next();
+							new TaskManagementMVC(StudentName);
+							test = true;
+						}
+						else{
+							System.out.println("Erreur d'input réessayez \n");
+						}
+						
+						
+					}
 				}
 
 			}
