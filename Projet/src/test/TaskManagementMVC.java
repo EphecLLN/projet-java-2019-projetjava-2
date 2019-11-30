@@ -67,7 +67,7 @@ public class TaskManagementMVC {
 			            
 					} catch (projetJava.model.DateTempsRestantInvalideException e) {	}
 		
-			        Scanner sc = new Scanner(System.in);
+			        Scanner sc = new Scanner(System.in); 
 					System.out.print("Insérez votre nom : ");
 					String name = sc.next();
 					
