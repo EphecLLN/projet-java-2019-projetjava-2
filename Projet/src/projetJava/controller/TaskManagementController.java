@@ -3,6 +3,7 @@ package projetJava.controller;
 import java.util.Date;
 
 import projetJava.model.DateTempsRestantInvalideException;
+import projetJava.model.Student;
 import projetJava.model.Task;
 import projetJava.model.TaskManagement;
 import projetJava.view.TaskManagementVue;
@@ -19,11 +20,12 @@ public class TaskManagementController {
 	//------------------------------------Method------------------------------------------------//
 	
 	
-	public void addTask(String taskName, Date deadline) throws projetJava.DateTempsRestantInvalideException {
+	public void addTask(String taskName, Date deadline, Student stud) throws projetJava.DateTempsRestantInvalideException {
 		if(model != null) {
 			try {
 			Task task = new Task(taskName, deadline); //create task
-			this.model.addTask(task); //add task to logged student
+			
+			this.model.addTask(task, stud); //add task to logged student
 			
 			} 
 			catch (DateTempsRestantInvalideException e){

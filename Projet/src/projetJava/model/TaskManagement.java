@@ -60,7 +60,7 @@ public class TaskManagement extends Observable {
     		
     		result += "Tâche " + task.getId() + " : " + 
     				task.getName() + "\t etu : " + 
-    				task.getStudent().getName() + "\t pour le : " +
+    				task.getStudent().getName() + " (id : "+ task.getStudent().getId() + ")\t pour le : " +
     				date + "\t Accomplie: " + task.getAccomplished() + "\n";
     	}
     	return result;
@@ -68,8 +68,10 @@ public class TaskManagement extends Observable {
 	
 	//-------------------------------------METHODE------------------------------------------------------//
 	
-	public void addTask(Task task) throws DateTempsRestantInvalideException {
-		currentStudent.addTask(task);
+	public void addTask(Task task, Student stud) throws DateTempsRestantInvalideException {
+		task.setStudent(stud);
+		getAllTasks().add(task);
+		//currentStudent.addTask(task);
 		this.setChanged();
         this.notifyObservers();
 	}

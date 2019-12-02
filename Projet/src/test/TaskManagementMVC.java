@@ -68,6 +68,7 @@ public class TaskManagementMVC {
 			        Student student1 = new Student("Victor"); 
 			        Student student2 = new Student ("Florent");
 			        Student student3 = new Student("Julien");
+			        Student student4 = new Student("Robin");
 					
 			        try {
 						Task task = new Task("Faire le ménage", new Date(2019, 11, 25)); //1

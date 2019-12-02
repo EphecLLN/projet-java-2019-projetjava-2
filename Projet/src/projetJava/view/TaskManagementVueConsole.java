@@ -80,14 +80,25 @@ public class TaskManagementVueConsole extends TaskManagementVue implements Obser
 						
 						System.out.print("Date limtie de la tâche sous le format 'DD-MM-YYYY' : ");
 						String date = scan.next();
-						affiche("");
+						
 						
 						String annee = date.charAt(6) + "" + date.charAt(7) + date.charAt(8) + date.charAt(9);
 						String mois = date.charAt(3) + "" + date.charAt(4);
 						String jour = date.charAt(0) + "" + date.charAt(1);
 						
+						System.out.print("Id de l'étudiant concerné : ");
+						int idStudent = scan.nextInt();
+						affiche("");
+						
+						Student student = new Student();
+						for(Student stud : model.getAllStudents()) {
+							if(stud.getId() == idStudent) {
+								student = stud;
+							}
+						}
 						try {
-							controller.addTask(taskName, new Date(Integer.parseInt(annee), Integer.parseInt(mois) -1, Integer.parseInt(jour)));
+							controller.addTask(taskName, new Date(Integer.parseInt(annee), Integer.parseInt(mois) -1, Integer.parseInt(jour)), 
+									student);
 						}
 						catch(DateTempsRestantInvalideException e){
 							printHelp();
