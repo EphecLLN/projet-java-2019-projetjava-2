@@ -26,25 +26,7 @@ public class TaskManagement extends Observable {
 	
 	//-------------------------------------CONSTRUCTEURS----------------------------------------------------//
 	public TaskManagement() {
-		Student student1 = new Student("Victor"); 
-        Student student2 = new Student ("Florent");
-        Student student3 = new Student("Julien");
-        Student student4 = new Student("Robin");
 		
-        try {
-			Task task = new Task("Faire le ménage", new Date(2019, 11, 25)); //1
-			Task task1 = new Task("Faire la vaiselle", new Date(2019, 11, 26)); //2
-            Task task2 = new Task("Passer l'aspirateur", new Date(2019, 11, 27)); //3
-            Task task3 = new Task("Ranger le commu", new Date(2019, 11, 26)); //4
-            try {
-				student1.addTask(task);
-				student2.addTask(task1);
-				student3.addTask(task2);
-				student3.addTask(task3);
-			} catch (DateTempsRestantInvalideException e) {		}
-            
-            
-		} catch (projetJava.model.DateTempsRestantInvalideException e) {	}
 	}
 	public TaskManagement(Student currentStudent) {
 		this.currentStudent = currentStudent;

@@ -65,7 +65,7 @@ public class TaskManagementMVC {
 			new Runnable() {
 				public void run() {
 					
-			        Student student1 = new Student("Victor"); 
+					Student student1 = new Student("Victor"); 
 			        Student student2 = new Student ("Florent");
 			        Student student3 = new Student("Julien");
 			        Student student4 = new Student("Robin");
