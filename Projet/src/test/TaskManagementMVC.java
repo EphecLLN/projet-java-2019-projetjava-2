@@ -3,15 +3,24 @@ package test;
 import java.util.Date;
 import java.util.Scanner;
 
+import javafx.application.Application;
 import projetJava.DateTempsRestantInvalideException;
+import projetJava.MainApp;
 import projetJava.controller.TaskManagementController;
 import projetJava.model.Student;
 import projetJava.model.Task;
 import projetJava.model.TaskManagement;
 import projetJava.view.TaskManagementVueConsole;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
-public class TaskManagementMVC { 
+
+public class TaskManagementMVC extends Application{ 
 
 	public TaskManagement TaskManagementMVC;
 	
@@ -104,6 +113,8 @@ public class TaskManagementMVC {
 							
 							TaskManagement s = new TaskManagement();
 							if(s.login(id)) {
+								//MainApp gui = new MainApp();
+								//MainApp.launch();
 								new TaskManagementMVC(id);
 								test = true;
 							}
@@ -124,5 +135,11 @@ public class TaskManagementMVC {
 
 			}
 			);
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
