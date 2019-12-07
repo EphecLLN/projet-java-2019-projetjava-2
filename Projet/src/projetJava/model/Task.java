@@ -4,13 +4,22 @@ package projetJava.model;
 import java.util.Calendar;
 import java.util.Date;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Task{
 
-	private int id;
-	private String name;
-	private Student student;
+	private IntegerProperty id;
+	private final StringProperty name; //pq le final
+	private ObjectProperty<Student> student;
 	private Date deadline;
-	private boolean accomplished;
+	private BooleanProperty accomplished;
 	
 	private static int nbrOfTasks;
 	
@@ -18,7 +27,15 @@ public class Task{
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
 	public Task() {
+		this(null);
 		
+	}
+	public Task(String name) {
+		nbrOfTasks ++;
+		this.name = new SimpleStringProperty(name);
+        this.id = new SimpleIntegerProperty(nbrOfTasks); 
+        this.accomplished = new SimpleBooleanProperty(false);
+        this.student = new SimpleObjectProperty<Student>(null);
 	}
 	public Task(String name, Date deadLine) throws DateTempsRestantInvalideException{
 		nbrOfTasks ++;
@@ -37,39 +54,51 @@ public class Task{
 	            throw new DateTempsRestantInvalideException("jours encodé inférieur à celui de cette année-ci:" + deadLine.getDate());
 	        }
 	        
-	        this.name = name;
-	        this.id = nbrOfTasks;
+	        this.name = new SimpleStringProperty(name);
+	        this.id = new SimpleIntegerProperty(nbrOfTasks);
 	        this.student = null;
 	        this.deadline = deadLine;
-	        this.accomplished = false;
+	        this.accomplished = new SimpleBooleanProperty(false);
 	        
 	        
 	}
 	
-	
+
 	//------------------------------------GETTERS SETTERS------------------------------------------//
 	public int getId() {
-		return this.id;
+		return this.id.get();
 	}
 	
 	public void setId(int id) {
-		this.id = id;
+		this.id.set(id);
+	}
+	
+	public IntegerProperty idProperty() {
+		return this.id;
 	}
 	
 	public String getName() {
-		return this.name;
+		return this.name.get();
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.name.set(name);
+	}
+	
+	public StringProperty nameProperty() {
+		return this.name;
 	}
 	
 	public Student getStudent() {
-		return student;
+		return student.get();
 	}
 	
 	public void setStudent(Student student) {
-		this.student = student;
+		this.student.set(student);
+	}
+	
+	public ObjectProperty<Student> studentProperty(){
+		return student;
 	}
 	
 	public Date getDeadline() {
@@ -81,21 +110,28 @@ public class Task{
 	}
 	
 	public boolean getAccomplished() {
-		return this.accomplished;
+		return this.accomplished.get();
 	}
 	
 	public void setAccomplished(boolean accomplished) {
-		this.accomplished = accomplished;
+		this.accomplished.set(accomplished);
 	}
 	
+	public BooleanProperty accomplishedProperty() {
+		return this.accomplished;
+	}
 	
 	//--------------------------------------TO STRING----------------------------------------------//
 	@Override
 	public String toString() {
+		/*
 		String date = this.deadline.getDate() + "-" + 
 					  this.deadline.getMonth()+ "-" +
 					  this.deadline.getYear();
-		return "Task " + getId() + ": " + name + "\t student= " + student.getName() + "\t deadline= " + date +
+					  */
+		return "Task " + getId() + ": " + name + "\t student= " + 
+					  student + 
+					  //"\t deadline= " + date +
 					  " \tAccomplie: " + this.getAccomplished() + "\n";
 	}
 

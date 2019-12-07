@@ -75,12 +75,12 @@ public class TaskManagementMVC {
 						Task task1 = new Task("Faire la vaiselle", new Date(2019, 11, 26)); //2
 			            Task task2 = new Task("Passer l'aspirateur", new Date(2019, 11, 27)); //3
 			            Task task3 = new Task("Ranger le commu", new Date(2019, 11, 26)); //4
-			            try {
+			            
 							student1.addTask(task);
 							student2.addTask(task1);
 							student3.addTask(task2);
 							student3.addTask(task3);
-						} catch (DateTempsRestantInvalideException e) {		}
+						
 			            
 			            
 					} catch (projetJava.model.DateTempsRestantInvalideException e) {	}

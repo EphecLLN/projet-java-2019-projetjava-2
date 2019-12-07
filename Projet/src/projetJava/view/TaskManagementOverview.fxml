@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetJava.view.TaskOverviewController">
    <children>
       <SplitPane dividerPositions="0.3779264214046823" layoutX="53.0" layoutY="70.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView prefHeight="298.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="taskTable" prefHeight="298.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="62.0" text="N° Task" />
-                      <TableColumn prefWidth="160.0" text="Task Name" />
+                      <TableColumn fx:id="idColumn" prefWidth="62.0" text="N° Task" />
+                      <TableColumn fx:id="NameColumn" prefWidth="160.0" text="Task Name" />
                     </columns>
                   </TableView>
                </children>
@@ -41,16 +45,16 @@
                         <Label text="Student" GridPane.rowIndex="2" />
                         <Label text="Deadline" GridPane.rowIndex="3" />
                         <Label text="accomplished" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.columnIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="idLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="NameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="studentLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="deadlineLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="accomplishedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
-                  <Button layoutX="289.0" layoutY="247.0" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-                  <Button layoutX="198.0" layoutY="241.0" mnemonicParsing="false" text="Edit.." AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="78.0" />
-                  <Button layoutX="119.0" layoutY="247.0" mnemonicParsing="false" text="New.." AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="135.0" />
+                  <Button layoutX="289.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleDeleteTask" text="Delete" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                  <Button layoutX="198.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleEditTask" text="Edit.." AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="78.0" />
+                  <Button layoutX="119.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleNewTask" text="New.." AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="135.0" />
                </children>
             </AnchorPane>
         </items>

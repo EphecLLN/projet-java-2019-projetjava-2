@@ -4,24 +4,28 @@
 package projetJava.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Observable;
-import java.util.Scanner;
 
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import projetJava.DateTempsRestantInvalideException;
 
 /**
  * @author robin
  *
  */
-public class TaskManagement extends Observable {
+public class TaskManagement extends Observable{
 
 	private static List<Student> allStudents = new ArrayList<>();
-	private static List<Task> allTasks = new ArrayList<>();
+	//private static List<Task> allTasks = new ArrayList<>();
+	
+	private static ObservableList<Task> allTasks = FXCollections.observableArrayList();
 	
 	private Student currentStudent;
 	private Task currentTask;
+	
 	
 	
 	//-------------------------------------CONSTRUCTEURS----------------------------------------------------//
