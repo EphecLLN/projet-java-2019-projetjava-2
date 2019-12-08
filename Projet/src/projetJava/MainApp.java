@@ -1,8 +1,7 @@
 package projetJava;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.Scanner;
+import java.time.LocalDate;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -15,10 +14,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import projetJava.model.Student;
 import projetJava.model.Task;
-import projetJava.model.TaskManagement;
 import projetJava.view.TaskEditDialogController;
 import projetJava.view.TaskOverviewController;
-import test.TaskManagementMVC;
 
 public class MainApp extends Application {
 
@@ -35,16 +32,14 @@ public class MainApp extends Application {
         allStudents.add(new Student("Victor"));
         allStudents.add(new Student("Julien")); 
         allStudents.add(new Student("Robin")); 
-    	
         
-    	allTasks.add(new Task("Faire le ménage"));
-    	allTasks.add(new Task("Passer l'aspirateur"));
-    	allTasks.add(new Task("Nettoyer la salle de bain"));
-    	allTasks.add(new Task("Ranger le commu"));
-    	allTasks.add(new Task("Nettoyer le commu"));
-    	allTasks.add(new Task("Faire la vaiselle"));
-    	
-    	
+        allTasks.add(new Task("Faire le ménage", LocalDate.of(2020, 2, 21)));
+		allTasks.add(new Task("Passer l'aspirateur", LocalDate.of(2020, 6, 21)));
+	    allTasks.add(new Task("Nettoyer la salle de bain", LocalDate.of(2019, 12, 21)));
+	    allTasks.add(new Task("Ranger le commu", LocalDate.of(2020, 4, 21)));
+	    allTasks.add(new Task("Nettoyer le commu", LocalDate.of(2020, 5, 21)));
+	    allTasks.add(new Task("Faire la vaiselle", LocalDate.of(2020, 06, 21)));
+			
     }
 	
 	/**
@@ -137,7 +132,7 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/TaskEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
-            
+           
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Task");
@@ -151,15 +146,13 @@ public class MainApp extends Application {
             
             controllerTask.setDialogStage(dialogStage);
             
-            if(task.getName() == null) {
-            	controllerTask.setTask(task);
-            }else {
-            	controllerTask.setTask(task);
-            }
+            controllerTask.setTask(task);
+           
+            
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
-
             return controllerTask.isOkClicked();
+            
         } catch (IOException e) {
             e.printStackTrace();
             return false;

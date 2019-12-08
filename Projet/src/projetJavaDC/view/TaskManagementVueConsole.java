@@ -1,4 +1,4 @@
-package projetJava.view;
+package projetJavaDC.view;
 
 import java.sql.Date;
 import java.util.InputMismatchException;
@@ -6,11 +6,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-import projetJava.DateTempsRestantInvalideException;
-import projetJava.controller.TaskManagementController;
-import projetJava.model.Student;
-import projetJava.model.Task;
-import projetJava.model.TaskManagement;
+import projetJavaDC.DateTempsRestantInvalideException;
+import projetJavaDC.controller.TaskManagementController;
+import projetJavaDC.model.Student;
+import projetJavaDC.model.Task;
+import projetJavaDC.model.TaskManagement;
 
 public class TaskManagementVueConsole extends TaskManagementVue implements Observer{
 	protected Scanner sc;

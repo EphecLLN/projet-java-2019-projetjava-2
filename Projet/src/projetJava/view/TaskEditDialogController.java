@@ -3,6 +3,8 @@
  */
 package projetJava.view;
 
+import java.util.Date;
+
 //import java.util.Date;
 
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 import projetJava.MainApp;
 import projetJava.model.Student;
 import projetJava.model.Task;
+import projetJava.util.DateUtil;
 
 
 /**
@@ -64,23 +67,27 @@ public class TaskEditDialogController {
     public void setTask(Task task) {
         this.task = task;
 
-        idField.setText(Integer.toString(task.getId()));
-        nameField.setText(task.getName());
+        if(task.getName() == null) {
+        	idField.setText(Integer.toString(Task.getNbrOfTasks()));
+        	nameField.setPromptText("Name...");
+        }else {
+        	idField.setText(Integer.toString(task.getId()));
+        	nameField.setText(task.getName());
+        }
+        
+        
         
         if(task.getStudent() == null) {
-        	studentField.setText("");
+        	studentField.setPromptText("Unknow Student");
         }else {
         	studentField.setText(task.getStudent().getName());
         }
-        
-        /*
-        deadlineField.setText(task.getDeadline().getDate() + "/" +
-				task.getDeadline().getMonth() + "/" +
-				task.getDeadline().getYear());
-        //deadlineField.setPromptText("dd/mm/yyyy");
-          */
-         
-        
+        if(task.getDeadLine() == null) {
+        	deadlineField.setPromptText("dd/mm/yyyy");
+        }else {
+        	deadlineField.setText(DateUtil.format(task.getDeadLine()));
+        	//deadlineField.setPromptText("dd/mm/yyyy");
+        }
         accomplishedField.setText(Boolean.toString(task.getAccomplished()));
     }
 
@@ -100,14 +107,19 @@ public class TaskEditDialogController {
     private void handleOk() {
     	if (isInputValid()) {
     		
-        	
+    		if(task.getName() == null) {
+            	task.setId(Task.getNbrOfTasks());
+            }else {
+            	System.out.println("");
+            }
     		int myId = Integer.parseInt(idField.getText());
     		task.setId(myId);
     		
         	task.setName(nameField.getText());
         	
         	setStudent();
-            //setDate();
+        	task.setDeadLine(DateUtil.parse(deadlineField.getText()));
+        	//setDate();
         	
         	task.setAccomplished(false);
         	
@@ -119,31 +131,28 @@ public class TaskEditDialogController {
     public void setStudent() {
     	boolean test = false;
     	MainApp tableAcces = new MainApp();
-    	System.out.println(studentField.getText());
         for(Student stud : tableAcces.getAllStudents()) {
         	if(studentField.getText().equals(stud.getName())) {
         		task.setStudent(stud);
         		test = true;
-        		System.out.println("réussi");
         	}
         }
         if(!test) {
-        	System.out.println("raté");
         	task.setStudent(null);
         }
     }
-    /*
+    
     public void setDate() {
     	String day = deadlineField.getText().charAt(0) + "" + deadlineField.getText().charAt(1);
     	String month = deadlineField.getText().charAt(3) + "" + deadlineField.getText().charAt(4);
     	String year = deadlineField.getText().charAt(6) + "" + deadlineField.getText().charAt(7) +
     			deadlineField.getText().charAt(8) + "" + deadlineField.getText().charAt(9);
     	
-    	Date assignedDate = new Date(Integer.parseInt(year), Integer.parseInt(month) -1, Integer.parseInt(day));
+    	Date assignedDate = new Date(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
         
         task.setDeadline(assignedDate);
     }
-    */
+    
     
     /**
      * Called when the user clicks cancel.
@@ -165,11 +174,13 @@ public class TaskEditDialogController {
             errorMessage += "No valid name!\n";
         }
 
-        /*
-        if (deadlineField.getText().length() != 10) {
-            errorMessage += "No valid deadline!\n";
+        if(deadlineField.getText() == null || deadlineField.getText().length() == 0) {
+        	errorMessage += "No valid deadline!\n";
+        }else {
+        	if(!DateUtil.validDate(deadlineField.getText())) {
+        		errorMessage += "No valid dedline. Use the format dd.mm.yyyy!\n";
+        	}
         }
-		*/
         
         if (errorMessage.length() == 0) {
             return true;

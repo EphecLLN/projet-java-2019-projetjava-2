@@ -1,7 +1,8 @@
 package projetJava.model;
 
 
-import java.util.Calendar;
+import java.time.LocalDate;
+//import java.util.Calendar;
 import java.util.Date;
 
 import javafx.beans.property.BooleanProperty;
@@ -16,9 +17,10 @@ import javafx.beans.property.StringProperty;
 public class Task{
 
 	private IntegerProperty id;
-	private final StringProperty name; //pq le final
+	private final StringProperty name; //pourquoi le final
 	private ObjectProperty<Student> student;
-	private Date deadline;
+	private ObjectProperty<LocalDate> deadLine;
+	private ObjectProperty<Date> deadline;
 	private BooleanProperty accomplished;
 	
 	private static int nbrOfTasks;
@@ -36,7 +38,18 @@ public class Task{
         this.id = new SimpleIntegerProperty(nbrOfTasks); 
         this.accomplished = new SimpleBooleanProperty(false);
         this.student = new SimpleObjectProperty<Student>(null);
+        this.deadLine = new SimpleObjectProperty<LocalDate>(null);
 	}
+	
+	public Task(String name, LocalDate deadLine) {
+		nbrOfTasks ++;
+		this.name = new SimpleStringProperty(name);
+        this.id = new SimpleIntegerProperty(nbrOfTasks); 
+        this.accomplished = new SimpleBooleanProperty(false);
+        this.student = new SimpleObjectProperty<Student>(null);
+        this.deadLine = new SimpleObjectProperty<LocalDate>(deadLine);
+	}
+	/*
 	public Task(String name, Date deadLine) throws DateTempsRestantInvalideException{
 		nbrOfTasks ++;
 		
@@ -56,13 +69,13 @@ public class Task{
 	        
 	        this.name = new SimpleStringProperty(name);
 	        this.id = new SimpleIntegerProperty(nbrOfTasks);
-	        this.student = null;
-	        this.deadline = deadLine;
+	        this.student =  new SimpleObjectProperty<Student>(null);
+	        this.deadline = new SimpleObjectProperty<Date>(new Date(2019,12,29));
 	        this.accomplished = new SimpleBooleanProperty(false);
 	        
 	        
 	}
-	
+	*/
 
 	//------------------------------------GETTERS SETTERS------------------------------------------//
 	public int getId() {
@@ -101,12 +114,28 @@ public class Task{
 		return student;
 	}
 	
+	public LocalDate getDeadLine() {
+		return deadLine.get();
+	}
+	
+	public void setDeadLine(LocalDate deadline) {
+		this.deadLine.set(deadline);
+	}
+	
+	public ObjectProperty<LocalDate> localDateProperty(){
+		return deadLine;
+	}
+	
 	public Date getDeadline() {
-		return this.deadline;
+		return deadline.get();
 	}
 	
 	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
+		this.deadline.set(deadline);
+	}
+	
+	public ObjectProperty<Date> dateProperty(){
+		return deadline;
 	}
 	
 	public boolean getAccomplished() {
@@ -121,6 +150,19 @@ public class Task{
 		return this.accomplished;
 	}
 	
+	/**
+	 * @return the nbrOfTasks
+	 */
+	public static int getNbrOfTasks() {
+		return nbrOfTasks;
+	}
+	
+	/**
+	 * @param nbrOfTasks the nbrOfTasks to set
+	 */
+	public static void setNbrOfTasks(int nbrOfTasks) {
+		Task.nbrOfTasks = nbrOfTasks;
+	}
 	//--------------------------------------TO STRING----------------------------------------------//
 	@Override
 	public String toString() {
@@ -128,7 +170,7 @@ public class Task{
 		String date = this.deadline.getDate() + "-" + 
 					  this.deadline.getMonth()+ "-" +
 					  this.deadline.getYear();
-					  */
+				*/	  
 		return "Task " + getId() + ": " + name + "\t student= " + 
 					  student + 
 					  //"\t deadline= " + date +
@@ -139,9 +181,9 @@ public class Task{
 	
 	 /**
      * @return result : int, le nombre de jour entre aujourd'hui et la date limite de la tache traitée
-     */
+     *
     public int timeLeft() {
-		//return DAYS.numberOfDays(LocalDate.now(), this.deadline);
+		//return DAYS.numberOfDays(LocalDate.now(), this.deadLine);
     	
     	
     	Calendar cal = Calendar.getInstance(); // Date de ce jour-ci
@@ -158,5 +200,5 @@ public class Task{
 		
 		return result;
 		
-    }
+    }*/
 }

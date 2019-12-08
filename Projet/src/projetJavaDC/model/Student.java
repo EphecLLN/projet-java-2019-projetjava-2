@@ -1,62 +1,50 @@
-package projetJava.model;
-
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+package projetJavaDC.model;
 
 public class Student{
 
-	private IntegerProperty id;
-	private StringProperty name;
+	private int id;
+	private String name;
 	
-	//private static int nbrOfStudents;
+	private static int nbrOfStudents;
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
 	public Student () {}
 	public Student(String name){
-		//nbrOfStudents ++;
+		nbrOfStudents ++;
 		
-		this.id = new SimpleIntegerProperty(1);//nbOfStudents
-		this.name = new SimpleStringProperty(name);
+		this.id = nbrOfStudents;
+		this.name = (name);
+		TaskManagement.getAllStudents().add(this);
 	}
 	
 	//------------------------------------GETTERS SETTERS------------------------------------------//
 	public int getId() {
-		return this.id.get();
-	}
-	
-	public void setId(int id) {
-		this.id.set(id);
-	}
-	
-	public IntegerProperty idProperty() {
 		return this.id;
 	}
 	
+	public void setId(int id) {
+		this.id = (id);
+	}
+	
 	public String getName() {
-		return this.name.get();
+		return this.name;
 	}
 	
 	public void setName(String name) {
-		this.name.set(name);
-	}
-	
-	public StringProperty nameProperty() {
-		return this.name;
+		this.name = (name);
 	}
 	
 	//--------------------------------------TO STRING----------------------------------------------//
 	@Override
 	public String toString() {
-		return "Student " + id.intValue() + ", name= " + name.getValue() + "\n";
+		return "Student " + id + ", name= " + name + "\n";
 	}
 	//--------------------------------------METHODES-----------------------------------------------//
-	/*
+	
 	public void addTask(Task task) throws DateTempsRestantInvalideException{
         task.setStudent(this);
         TaskManagement.getAllTasks().add(task);
        
     }
-    */
+    
 }

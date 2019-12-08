@@ -14,9 +14,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import projetJava.MainApp;
-import projetJava.model.DateTempsRestantInvalideException;
 import projetJava.model.Student;
 import projetJava.model.Task;
+import projetJava.util.DateUtil;
 
 /**
  * @author robin
@@ -27,8 +27,6 @@ public class TaskOverviewController {
 	@FXML
 	private TableView<Task> taskTable;
 	@FXML
-	private TableView<Student> studentTable;
-	@FXML
 	private TableColumn<Task, Integer> idColumn;
 	@FXML
     private TableColumn<Task, String> NameColumn;
@@ -37,15 +35,20 @@ public class TaskOverviewController {
     private Label idLabel;
     @FXML
     private Label NameLabel;
-    
     @FXML
     private Label studentLabel;
     @FXML
     private Label deadlineLabel;
-    
     @FXML
     private Label accomplishedLabel;
 
+    @FXML
+	private TableView<Student> studentTable;
+	@FXML
+	private TableColumn<Student, String> idColumnStud;
+	@FXML
+	private TableColumn<Student, String> NameColumnStud;
+	
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -108,7 +111,6 @@ public class TaskOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        System.out.println(mainApp.getAllTasks());
         taskTable.setItems(mainApp.getAllTasks());
         //studentTable.setItems(mainApp.getAllStudents());
     }
@@ -130,25 +132,22 @@ public class TaskOverviewController {
         	}else {
         		studentLabel.setText(task.getStudent().getName());
         	}
-        	
+        	deadlineLabel.setText(DateUtil.format(task.getDeadLine()));
         	/*
-        	deadlineLabel.setText(task.getDeadline().getDate() + "/" +
-        							task.getDeadline().getMonth() + "/" +
-        							task.getDeadline().getYear());
+        	if(task.getDeadline() == null) {
+            	deadlineLabel.setText("dd/mm/yyyy");
+        	}else {
+        		int month = (task.getDeadline().getMonth());
+            	deadlineLabel.setText(task.getDeadline().getDate() + "/" + month + "/" + task.getDeadline().getYear());
+        	}
         	*/
-        	
         	accomplishedLabel.setText(Boolean.toString(task.getAccomplished()));
-
-            
         } else {
             // Person is null, remove all the text.
         	idLabel.setText("");
         	NameLabel.setText("");
         	studentLabel.setText("");
-        	/*
         	deadlineLabel.setText("");
-        	*/
-        	
         	accomplishedLabel.setText("");
         }
     }
@@ -180,8 +179,8 @@ public class TaskOverviewController {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setHeaderText("No Task Selected");
+            alert.setContentText("Please select a Task in the table.");
 
             alert.showAndWait();
         }
@@ -195,8 +194,8 @@ public class TaskOverviewController {
     @FXML
     private void handleNewTask(){
         Task tempTask = new Task();
+        Task.setNbrOfTasks(taskTable.getItems().size() + 1);
         boolean okClicked = mainApp.showTaskEditDialog(tempTask);
-        
         if (okClicked) {
             mainApp.getAllTasks().add(tempTask);
         }
@@ -225,5 +224,23 @@ public class TaskOverviewController {
 
             alert.showAndWait();
         }
+    }
+    
+    @FXML
+    private void handleAccomplishTask() {
+    	Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
+    	
+    	if(selectedTask != null) {
+    		selectedTask.setAccomplished(true);
+    	}else {
+    		 // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Task Selected");
+            alert.setContentText("Please select a Task in the table.");
+
+            alert.showAndWait();
+    	}
     }
 }

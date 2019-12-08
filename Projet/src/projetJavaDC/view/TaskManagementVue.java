@@ -1,8 +1,8 @@
-package projetJava.view;
+package projetJavaDC.view;
 
 import java.util.Observer;
-import projetJava.controller.TaskManagementController;
-import projetJava.model.TaskManagement;
+import projetJavaDC.controller.TaskManagementController;
+import projetJavaDC.model.TaskManagement;
 
 public abstract class TaskManagementVue implements Observer{
 	

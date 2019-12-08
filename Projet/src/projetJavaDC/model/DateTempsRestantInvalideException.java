@@ -1,7 +1,7 @@
 /**
  * 
  */
-package projetJava.model;
+package projetJavaDC.model;
 
 /**
  * @author robin

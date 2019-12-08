@@ -1,7 +1,7 @@
 /**
  * 
  */
-package projetJava;
+package projetJavaDC;
 
 /**
  * @author robin

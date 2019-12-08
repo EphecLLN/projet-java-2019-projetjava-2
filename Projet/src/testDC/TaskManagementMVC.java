@@ -1,26 +1,17 @@
-package test;
+package testDC;
 
 import java.util.Date;
 import java.util.Scanner;
 
-import javafx.application.Application;
-import projetJava.DateTempsRestantInvalideException;
-import projetJava.MainApp;
-import projetJava.controller.TaskManagementController;
-import projetJava.model.Student;
-import projetJava.model.Task;
-import projetJava.model.TaskManagement;
-import projetJava.view.TaskManagementVueConsole;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import projetJavaDC.DateTempsRestantInvalideException;
+import projetJavaDC.controller.TaskManagementController;
+import projetJavaDC.model.Student;
+import projetJavaDC.model.Task;
+import projetJavaDC.model.TaskManagement;
+import projetJavaDC.view.TaskManagementVueConsole;
 
-
-public class TaskManagementMVC extends Application{ 
+public class TaskManagementMVC{ 
 
 	public TaskManagement TaskManagementMVC;
 	
@@ -92,7 +83,7 @@ public class TaskManagementMVC extends Application{
 						
 			            
 			            
-					} catch (projetJava.model.DateTempsRestantInvalideException e) {	}
+					} catch (projetJavaDC.model.DateTempsRestantInvalideException e) {	}
 			        
 			        
 			        boolean test = false;
@@ -135,11 +126,5 @@ public class TaskManagementMVC extends Application{
 
 			}
 			);
-	}
-
-	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
 	}
 }

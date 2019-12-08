@@ -1,16 +1,12 @@
 /**
  * 
  */
-package projetJava.model;
+package projetJavaDC.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import projetJava.DateTempsRestantInvalideException;
+import projetJavaDC.DateTempsRestantInvalideException;
 
 /**
  * @author robin
@@ -19,9 +15,7 @@ import projetJava.DateTempsRestantInvalideException;
 public class TaskManagement extends Observable{
 
 	private static List<Student> allStudents = new ArrayList<>();
-	//private static List<Task> allTasks = new ArrayList<>();
-	
-	private static ObservableList<Task> allTasks = FXCollections.observableArrayList();
+	private static List<Task> allTasks = new ArrayList<>();
 	
 	private Student currentStudent;
 	private Task currentTask;
