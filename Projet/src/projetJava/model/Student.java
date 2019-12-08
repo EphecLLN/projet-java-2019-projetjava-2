@@ -10,14 +10,14 @@ public class Student{
 	private IntegerProperty id;
 	private StringProperty name;
 	
-	//private static int nbrOfStudents;
+	private static int nbrOfStudents;
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
-	public Student () {}
+	public Student () { this(null); }
 	public Student(String name){
-		//nbrOfStudents ++;
+		nbrOfStudents ++;
 		
-		this.id = new SimpleIntegerProperty(1);//nbOfStudents
+		this.id = new SimpleIntegerProperty(getNbrOfStudents());
 		this.name = new SimpleStringProperty(name);
 	}
 	
@@ -46,6 +46,18 @@ public class Student{
 		return this.name;
 	}
 	
+	/**
+	 * @return the nbrOfStudents
+	 */
+	public static int getNbrOfStudents() {
+		return nbrOfStudents;
+	}
+	/**
+	 * @param nbrOfStudents the nbrOfStudents to set
+	 */
+	public static void setNbrOfStudents(int nbrOfStudents) {
+		Student.nbrOfStudents = nbrOfStudents;
+	}
 	//--------------------------------------TO STRING----------------------------------------------//
 	@Override
 	public String toString() {

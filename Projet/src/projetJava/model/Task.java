@@ -2,9 +2,9 @@ package projetJava.model;
 
 
 import java.time.LocalDate;
+import java.time.Period;
 //import java.util.Calendar;
 import java.util.Date;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -181,24 +181,14 @@ public class Task{
 	
 	 /**
      * @return result : int, le nombre de jour entre aujourd'hui et la date limite de la tache traitée
-     *
+     */
     public int timeLeft() {
-		//return DAYS.numberOfDays(LocalDate.now(), this.deadLine);
+    	Period intervalPeriod = Period.between(LocalDate.now(), this.getDeadLine());
     	
-    	
-    	Calendar cal = Calendar.getInstance(); // Date de ce jour-ci
+    	System.out.println("Difference of days: " + intervalPeriod.getDays());
+        System.out.println("Difference of months: " + intervalPeriod.getMonths());
+        System.out.println("Difference of years: " + intervalPeriod.getYears());
+    	return 0;
 		
-		int jourActuel = cal.get(Calendar.YEAR);
-		int moisActuel = cal.get(Calendar.MONTH);
-		int anneeActuel = cal.get(Calendar.DATE);
-		
-		Date today = new Date(jourActuel, moisActuel, anneeActuel); // Pour avoir le même format
-		
-		long dateToCalculate = this.getDeadline().getTime();
-		long difference = dateToCalculate - today.getTime();
-		int result = (int)(difference/(1000*60*60*24));
-		
-		return result;
-		
-    }*/
+    }
 }

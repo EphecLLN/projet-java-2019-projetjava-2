@@ -3,9 +3,6 @@
  */
 package projetJava.view;
 
-import java.util.Date;
-
-//import java.util.Date;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -92,16 +89,16 @@ public class TaskEditDialogController {
     }
 
     /**
-     * Returns true if the user clicked OK, false otherwise.
+     * Renvoie true si l'utilisateur click sur Ok, false sinon.
      *
-     * @return
+     * @return true si l'utilisateur click sur Ok, false sinon.
      */
     public boolean isOkClicked() {
         return okClicked;
     }
 
     /**
-     * Called when the user clicks ok.
+     * Appelé quand l'utilisateur click sur OK
      */
     @FXML
     private void handleOk() {
@@ -119,7 +116,6 @@ public class TaskEditDialogController {
         	
         	setStudent();
         	task.setDeadLine(DateUtil.parse(deadlineField.getText()));
-        	//setDate();
         	
         	task.setAccomplished(false);
         	
@@ -131,6 +127,8 @@ public class TaskEditDialogController {
     public void setStudent() {
     	boolean test = false;
     	MainApp tableAcces = new MainApp();
+    	System.out.println(tableAcces.getAllStudents());
+    	System.out.println(tableAcces.getAllTasks());
         for(Student stud : tableAcces.getAllStudents()) {
         	if(studentField.getText().equals(stud.getName())) {
         		task.setStudent(stud);
@@ -142,18 +140,6 @@ public class TaskEditDialogController {
         }
     }
     
-    public void setDate() {
-    	String day = deadlineField.getText().charAt(0) + "" + deadlineField.getText().charAt(1);
-    	String month = deadlineField.getText().charAt(3) + "" + deadlineField.getText().charAt(4);
-    	String year = deadlineField.getText().charAt(6) + "" + deadlineField.getText().charAt(7) +
-    			deadlineField.getText().charAt(8) + "" + deadlineField.getText().charAt(9);
-    	
-    	Date assignedDate = new Date(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
-        
-        task.setDeadline(assignedDate);
-    }
-    
-    
     /**
      * Called when the user clicks cancel.
      */
@@ -163,9 +149,9 @@ public class TaskEditDialogController {
     }
 
     /**
-     * Validates the user input in the text fields.
+     * Valide les "input" inséré par l'utilisateur
      *
-     * @return true if the input is valid
+     * @return true Si les input sont valide
      */
     private boolean isInputValid() {
         String errorMessage = "";

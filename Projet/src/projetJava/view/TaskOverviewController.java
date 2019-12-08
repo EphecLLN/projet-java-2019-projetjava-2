@@ -4,6 +4,8 @@
 package projetJava.view;
 
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
@@ -41,11 +43,17 @@ public class TaskOverviewController {
     private Label deadlineLabel;
     @FXML
     private Label accomplishedLabel;
+    @FXML
+    private Label dayLabel;
+    @FXML
+    private Label monthLabel;
+    @FXML
+    private Label yearLabel;
 
     @FXML
 	private TableView<Student> studentTable;
 	@FXML
-	private TableColumn<Student, String> idColumnStud;
+	private TableColumn<Student, Integer> idColumnStud;
 	@FXML
 	private TableColumn<Student, String> NameColumnStud;
 	
@@ -84,8 +92,13 @@ public class TaskOverviewController {
     	idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         NameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         
-        //cleat le détail de la tâche
+        idColumnStud.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        NameColumnStud.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        
+        //clear le détail de la tâche
         showTaskDetails(null);
+        
+        
         
         /*
          * Pour être informé quand l’utilisateur sélectionne une tâche dans la tableau , nous avons besoin d’écouter les changements.
@@ -98,7 +111,6 @@ public class TaskOverviewController {
         //Faire attention lorsqu'il y a des changement et regarder le détail de la tâche quand ça change
         taskTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showTaskDetails(newValue));
-        
        
     }
 
@@ -112,7 +124,7 @@ public class TaskOverviewController {
 
         // Add observable list data to the table
         taskTable.setItems(mainApp.getAllTasks());
-        //studentTable.setItems(mainApp.getAllStudents());
+        studentTable.setItems(mainApp.getAllStudents());
     }
     
     /**
@@ -133,14 +145,6 @@ public class TaskOverviewController {
         		studentLabel.setText(task.getStudent().getName());
         	}
         	deadlineLabel.setText(DateUtil.format(task.getDeadLine()));
-        	/*
-        	if(task.getDeadline() == null) {
-            	deadlineLabel.setText("dd/mm/yyyy");
-        	}else {
-        		int month = (task.getDeadline().getMonth());
-            	deadlineLabel.setText(task.getDeadline().getDate() + "/" + month + "/" + task.getDeadline().getYear());
-        	}
-        	*/
         	accomplishedLabel.setText(Boolean.toString(task.getAccomplished()));
         } else {
             // Person is null, remove all the text.
@@ -243,4 +247,67 @@ public class TaskOverviewController {
             alert.showAndWait();
     	}
     }
+    @FXML
+    private void handleTimeLeft() {
+    	Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
+    	
+    	if(selectedTask != null) {
+    		Period intervalPeriod = Period.between(LocalDate.now(), selectedTask.getDeadLine());
+    		
+    		dayLabel.setText("Difference of days: " + intervalPeriod.getDays());
+    		monthLabel.setText("Difference of months: " + intervalPeriod.getMonths());
+    		yearLabel.setText("Difference of years: " + intervalPeriod.getYears());
+    	}
+    }
+    
+    @FXML
+    private void handleDeleteStudent() {
+    	//On regarde quel SelectionModel il a choisi puis on prend l'index, et après cela on remove dans l'arrayList
+    	int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
+    	
+    	//On gère l'erreur au cas ou l'utilisateur n'a sélectionné aucune tâche 
+    	if (selectedIndex >= 0) {
+    		
+    		//Alerte s'ouvre pour que l'utilisateur confirme s'il veut supprimer la tâche
+        	Alert alert = new Alert(AlertType.CONFIRMATION);
+        	alert.setTitle("Confirmation");
+        	alert.setHeaderText("Confirm");
+        	alert.setContentText(null);
+        	
+        	Optional<ButtonType> result = alert.showAndWait();
+        	if(result.get() == ButtonType.OK) {
+        		studentTable.getItems().remove(selectedIndex);
+        	}
+        	else {
+        		alert.close();
+        	}
+            
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Student Selected");
+            alert.setContentText("Please select a Student in the table.");
+
+            alert.showAndWait();
+        }
+    	
+    }
+    /**
+     * Appelez lorsque l'utilisateur appuie sur le boutton "New"
+     * Ouvre une interface pour editer les détails d'un étudiant.
+     */
+    @FXML
+    private void handleNewstudent(){
+    	Student tempStud = new Student();
+    	Student.setNbrOfStudents(studentTable.getItems().size() + 1);
+        boolean okClicked = mainApp.showStudentEditDialog(tempStud);
+        
+        if (okClicked) {
+        	//Le add ne se fait pas !!!?? 
+            mainApp.getAllStudents().add(tempStud);
+        }
+    }
+    
 }

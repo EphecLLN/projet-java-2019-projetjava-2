@@ -14,12 +14,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import projetJava.model.Student;
 import projetJava.model.Task;
+import projetJava.view.StudentEditDialogController;
 import projetJava.view.TaskEditDialogController;
 import projetJava.view.TaskOverviewController;
 
 public class MainApp extends Application {
 
 	private Stage primaryStage;
+	//private AnchorPane TaskManagementOverview;
 	private BorderPane rootLayout;
 	
 	private ObservableList<Task> allTasks = FXCollections.observableArrayList();
@@ -105,10 +107,16 @@ public class MainApp extends Application {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/TaskManagementOverview.fxml"));
+            
             AnchorPane TaskManagementOverview = (AnchorPane) loader.load();
+            //TaskManagementOverview = (AnchorPane) loader.load();
             
             // Set person overview into the center of root layout.
+            
             rootLayout.setCenter(TaskManagementOverview);
+            //Scene scene = new Scene(TaskManagementOverview);
+            //primaryStage.setScene(scene);
+            //primaryStage.show();
             
             //donner l'accès de controller task à la MainApp
             TaskOverviewController controllerTask = loader.getController();
@@ -128,7 +136,7 @@ public class MainApp extends Application {
      */
     public boolean showTaskEditDialog(Task task) {
         try {
-            // Load the fxml file and create a new stage for the popup dialog.
+            // Charger le fichier fxml et créer un nouveau "stage" pour le pop up du dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/TaskEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
@@ -147,6 +155,39 @@ public class MainApp extends Application {
             controllerTask.setDialogStage(dialogStage);
             
             controllerTask.setTask(task);
+           
+            
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            return controllerTask.isOkClicked();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean showStudentEditDialog(Student student) {
+    	try {
+    		// Charger le fichier fxml et créer un nouveau "stage" pour le pop up du dialog.
+    		FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/StudentEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+        	
+        	// Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Student");
+            
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            // Set the Task into the controller.
+            StudentEditDialogController controllerTask = loader.getController();
+           
+            controllerTask.setDialogStage(dialogStage);
+            
+            controllerTask.setStudent(student);
            
             
             // Show the dialog and wait until the user closes it
