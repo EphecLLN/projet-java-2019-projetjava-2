@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="298.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetJava.view.TaskEditDialogController">
+<AnchorPane prefHeight="298.0" prefWidth="368.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetJava.view.TaskEditDialogController">
    <children>
       <GridPane layoutX="7.0" layoutY="11.0" prefHeight="226.0" prefWidth="352.0">
         <columnConstraints>
@@ -35,7 +35,7 @@
             <TextField fx:id="accomplishedField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button layoutX="183.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="30.0" prefWidth="80.0" text="OK" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="105.0" />
-      <Button layoutX="272.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" prefWidth="80.0" text="Cancel" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+      <Button layoutX="167.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="30.0" prefWidth="80.0" text="OK" AnchorPane.bottomAnchor="10.399999999999977" AnchorPane.rightAnchor="118.0" />
+      <Button layoutX="272.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="34.0" prefWidth="91.0" text="Cancel" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
    </children>
 </AnchorPane>

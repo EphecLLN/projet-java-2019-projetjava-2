@@ -199,9 +199,13 @@ public class TaskOverviewController {
     private void handleNewTask(){
         Task tempTask = new Task();
         Task.setNbrOfTasks(taskTable.getItems().size() + 1);
-        boolean okClicked = mainApp.showTaskEditDialog(tempTask);
+        
+        
+        
+        boolean okClicked = mainApp.showTaskEditDialog(tempTask, this.mainApp);
         if (okClicked) {
             mainApp.getAllTasks().add(tempTask);
+           
         }
     }
 
@@ -213,7 +217,7 @@ public class TaskOverviewController {
     private void handleEditTask() {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
-            boolean okClicked = mainApp.showTaskEditDialog(selectedTask);
+            boolean okClicked = mainApp.showTaskEditDialog(selectedTask, this.mainApp);
             if (okClicked) {
                 showTaskDetails(selectedTask);
             }
@@ -305,8 +309,9 @@ public class TaskOverviewController {
         boolean okClicked = mainApp.showStudentEditDialog(tempStud);
         
         if (okClicked) {
-        	//Le add ne se fait pas !!!?? 
+        	//System.out.println(mainApp.getAllStudents());
             mainApp.getAllStudents().add(tempStud);
+            //System.out.println(mainApp.getAllStudents());
         }
     }
     

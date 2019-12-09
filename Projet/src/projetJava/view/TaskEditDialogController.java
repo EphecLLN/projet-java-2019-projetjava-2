@@ -6,7 +6,6 @@ package projetJava.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-//import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -37,7 +36,7 @@ public class TaskEditDialogController {
     private Stage dialogStage;
     private Task task;
     private boolean okClicked = false;
-    
+    private MainApp mainApp;
     
     /**
      * Initializes the controller class. This method is automatically called
@@ -55,15 +54,15 @@ public class TaskEditDialogController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-
     /**
      * Sets the Task to be edited in the dialog.
      *
      * @param Task
      */
-    public void setTask(Task task) {
+    public void setTask(Task task, MainApp mainApp) {
         this.task = task;
-
+        this.mainApp = mainApp;
+        
         if(task.getName() == null) {
         	idField.setText(Integer.toString(Task.getNbrOfTasks()));
         	nameField.setPromptText("Name...");
@@ -71,9 +70,6 @@ public class TaskEditDialogController {
         	idField.setText(Integer.toString(task.getId()));
         	nameField.setText(task.getName());
         }
-        
-        
-        
         if(task.getStudent() == null) {
         	studentField.setPromptText("Unknow Student");
         }else {
@@ -126,10 +122,8 @@ public class TaskEditDialogController {
     
     public void setStudent() {
     	boolean test = false;
-    	MainApp tableAcces = new MainApp();
-    	System.out.println(tableAcces.getAllStudents());
-    	System.out.println(tableAcces.getAllTasks());
-        for(Student stud : tableAcces.getAllStudents()) {
+    	
+        for(Student stud : mainApp.getAllStudents()) {
         	if(studentField.getText().equals(stud.getName())) {
         		task.setStudent(stud);
         		test = true;

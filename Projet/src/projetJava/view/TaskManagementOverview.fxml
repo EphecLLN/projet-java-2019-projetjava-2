@@ -10,24 +10,24 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetJava.view.TaskOverviewController">
+<AnchorPane prefHeight="550.0" prefWidth="950.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetJava.view.TaskOverviewController">
    <children>
       <SplitPane dividerPositions="0.3779264214046823" prefHeight="400.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="taskTable" prefHeight="385.0" prefWidth="226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="taskTable" prefHeight="385.0" prefWidth="235.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="idColumn" prefWidth="62.0" text="N° Task" />
-                      <TableColumn fx:id="NameColumn" prefWidth="160.0" text="Task Name" />
+                      <TableColumn fx:id="idColumn" prefWidth="95.19997882843018" text="N° Task" />
+                      <TableColumn fx:id="NameColumn" prefWidth="168.00001525878906" text="Task Name" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="358.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="358.0" styleClass="background">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Task Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                  <GridPane layoutX="7.0" layoutY="29.0" prefHeight="225.0" prefWidth="330.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="29.0">
+                  <Label layoutX="14.0" layoutY="14.0" styleClass="label-header" text="Task Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                  <GridPane layoutX="10.0" layoutY="59.0" prefHeight="214.0" prefWidth="419.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="59.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="117.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="166.0" />
@@ -45,19 +45,19 @@
                         <Label text="Student" GridPane.rowIndex="2" />
                         <Label text="Deadline" GridPane.rowIndex="3" />
                         <Label text="accomplished" GridPane.rowIndex="4" />
-                        <Label fx:id="idLabel" text="Label" GridPane.columnIndex="1" />
-                        <Label fx:id="NameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="studentLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="deadlineLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="accomplishedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="idLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="NameLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="studentLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="deadlineLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="accomplishedLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
-                  <Button layoutX="289.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleDeleteTask" text="Delete" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-                  <Button layoutX="198.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleEditTask" text="Edit.." AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="78.0" />
-                  <Button layoutX="119.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleNewTask" text="New.." AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="135.0" />
-                  <Button layoutX="206.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleAccomplishTask" prefHeight="17.0" prefWidth="91.0" text="Accomplished" AnchorPane.bottomAnchor="52.0" AnchorPane.rightAnchor="53.0" />
-                  <Button layoutX="37.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleTimeLeft" text="Time left" />
-                  <GridPane layoutX="3.0" layoutY="294.0" prefHeight="90.0" prefWidth="164.0">
+                  <Button layoutX="243.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="35.0" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                  <Button layoutX="335.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleEditTask" prefHeight="35.0" prefWidth="100.0" text="Edit.." AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="15.0" />
+                  <Button layoutX="338.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleNewTask" prefHeight="35.0" prefWidth="100.0" text="New.." AnchorPane.bottomAnchor="105.0" AnchorPane.rightAnchor="15.0" />
+                  <Button layoutX="281.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleAccomplishTask" prefHeight="35.0" prefWidth="100.0" text="Done" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="15.0" />
+                  <Button layoutX="30.0" layoutY="364.0" mnemonicParsing="false" onAction="#handleTimeLeft" prefHeight="35.0" prefWidth="105.0" text="Time left" />
+                  <GridPane layoutX="17.0" layoutY="429.0" prefHeight="90.0" prefWidth="164.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -76,14 +76,14 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <TableView fx:id="studentTable" layoutX="570.0" layoutY="27.0" prefHeight="296.0" prefWidth="230.0">
+      <TableView fx:id="studentTable" layoutX="570.0" layoutY="27.0" prefHeight="462.0" prefWidth="235.0" AnchorPane.bottomAnchor="61.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
         <columns>
-          <TableColumn fx:id="idColumnStud" prefWidth="75.0" text="N° Student" />
-          <TableColumn fx:id="NameColumnStud" prefWidth="155.0" text="Student Name" />
+          <TableColumn fx:id="idColumnStud" prefWidth="105.59997701644897" text="N° Student" />
+          <TableColumn fx:id="NameColumnStud" prefWidth="144.79993438720703" text="Student Name" />
         </columns>
       </TableView>
-      <Label layoutX="618.0" layoutY="6.0" prefHeight="17.0" prefWidth="108.0" text="Student Details" textFill="#0d0000" AnchorPane.leftAnchor="645.0" AnchorPane.rightAnchor="74.0" />
-      <Button layoutX="734.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleDeleteStudent" text="Delete" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Button layoutX="674.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleNewstudent" text="New.." AnchorPane.bottomAnchor="10.0" />
+      <Label layoutX="631.0" layoutY="4.0" prefHeight="17.0" prefWidth="108.0" text="Student Details" textFill="#0d0000" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="4.0" />
+      <Button layoutX="734.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleDeleteStudent" prefHeight="35.0" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Button layoutX="607.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleNewstudent" prefHeight="35.0" prefWidth="100.0" text="New.." AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="115.0" />
    </children>
 </AnchorPane>

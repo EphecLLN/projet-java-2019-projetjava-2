@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -73,6 +74,8 @@ public class MainApp extends Application {
 		
 		//runConsole();
 		
+		this.primaryStage.getIcons().add(new Image("file:///C:/Users/robin/git/projet-java-2019-projetjava-2/resources/images/iconfinder_Note_Book_86977.png"));
+		
 		initRootLayout();
 		
 		showTaskManagementOverview();
@@ -134,7 +137,7 @@ public class MainApp extends Application {
      * @param Task l'objet task à éditer
      * @return true si l'utilisateur click sur OK, false sinon.
      */
-    public boolean showTaskEditDialog(Task task) {
+    public boolean showTaskEditDialog(Task task, MainApp mainApp) {
         try {
             // Charger le fichier fxml et créer un nouveau "stage" pour le pop up du dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -154,8 +157,7 @@ public class MainApp extends Application {
             
             controllerTask.setDialogStage(dialogStage);
             
-            controllerTask.setTask(task);
-           
+            controllerTask.setTask(task, mainApp);
             
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
@@ -186,7 +188,6 @@ public class MainApp extends Application {
             StudentEditDialogController controllerTask = loader.getController();
            
             controllerTask.setDialogStage(dialogStage);
-            
             controllerTask.setStudent(student);
            
             
