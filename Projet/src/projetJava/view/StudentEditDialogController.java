@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import projetJava.MainApp;
 import projetJava.model.Student;
 
 
@@ -16,6 +17,7 @@ public class StudentEditDialogController {
 	private Stage dialogStage;
 	private Student student;
 	private boolean okClicked = false;
+	private MainApp mainApp;
 	
 	/**
      * Initializes the controller class. This method is automatically called
@@ -39,8 +41,9 @@ public class StudentEditDialogController {
      * 
      * @param Student
      */
-    public void setStudent(Student student) {
+    public void setStudent(Student student, MainApp mainApp) {
     	this.student = student;
+    	this.mainApp = mainApp;
     	
     	nameField.setText(student.getName());
     }
@@ -85,6 +88,11 @@ public class StudentEditDialogController {
     	if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "No valid name!\n";
         }
+    	for(Student stud : mainApp.getAllStudents()) {
+    		if(stud.getName().equals(nameField.getText())) {
+    			errorMessage += "Name already used!\n";
+    		}
+    	}
     	if (errorMessage.length() == 0) {
             return true;
         } else {

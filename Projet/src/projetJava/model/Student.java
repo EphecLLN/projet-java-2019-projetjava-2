@@ -13,7 +13,15 @@ public class Student{
 	private static int nbrOfStudents;
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
-	public Student () { this(null); }
+	/**
+	 * the default constructor
+	 */
+	public Student () { 
+		this(null); 
+	}
+	/**
+	 * @param name the name of the Student
+	 */
 	public Student(String name){
 		nbrOfStudents ++;
 		
@@ -22,26 +30,44 @@ public class Student{
 	}
 	
 	//------------------------------------GETTERS SETTERS------------------------------------------//
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return this.id.get();
 	}
 	
+	/**
+	 * @param id the id of Student to set
+	 */
 	public void setId(int id) {
 		this.id.set(id);
 	}
 	
+	/**
+	 * @return the id IntegerProperty 
+	 */
 	public IntegerProperty idProperty() {
 		return this.id;
 	}
 	
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return this.name.get();
 	}
 	
+	/**
+	 * @param name the name of Student to set
+	 */
 	public void setName(String name) {
 		this.name.set(name);
 	}
 	
+	/**
+	 * @return the name StringProperty
+	 */
 	public StringProperty nameProperty() {
 		return this.name;
 	}
@@ -53,7 +79,7 @@ public class Student{
 		return nbrOfStudents;
 	}
 	/**
-	 * @param nbrOfStudents the nbrOfStudents to set
+	 * @param nbrOfStudents the number Of Students to set
 	 */
 	public static void setNbrOfStudents(int nbrOfStudents) {
 		Student.nbrOfStudents = nbrOfStudents;
@@ -63,12 +89,5 @@ public class Student{
 	public String toString() {
 		return "Student " + id.intValue() + ", name= " + name.getValue() + "\n";
 	}
-	//--------------------------------------METHODES-----------------------------------------------//
-	/*
-	public void addTask(Task task) throws DateTempsRestantInvalideException{
-        task.setStudent(this);
-        TaskManagement.getAllTasks().add(task);
-       
-    }
-    */
+	
 }

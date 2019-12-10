@@ -4,6 +4,9 @@
 package projetJava.view;
 
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -154,11 +157,20 @@ public class TaskEditDialogController {
             errorMessage += "No valid name!\n";
         }
 
+        boolean testDateValide = true;
+        
         if(deadlineField.getText() == null || deadlineField.getText().length() == 0) {
         	errorMessage += "No valid deadline!\n";
         }else {
         	if(!DateUtil.validDate(deadlineField.getText())) {
-        		errorMessage += "No valid dedline. Use the format dd.mm.yyyy!\n";
+        		errorMessage += "No valid deadline. Use the format dd.mm.yyyy!\n";
+        		testDateValide = false;
+        	}
+        }
+        
+        if(testDateValide) {
+        	if(DateUtil.parse(deadlineField.getText()).compareTo(LocalDate.now()) < 0) {
+        		errorMessage += "No valid deadline. Date lower than today!\n";
         	}
         }
         

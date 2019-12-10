@@ -24,7 +24,7 @@ import projetJava.util.DateUtil;
  * @author robin
  *
  */
-public class TaskOverviewController {
+public class TaskManagementOverviewController {
 
 	@FXML
 	private TableView<Task> taskTable;
@@ -64,7 +64,7 @@ public class TaskOverviewController {
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public TaskOverviewController() {
+    public TaskManagementOverviewController() {
     }
 
     /**
@@ -240,6 +240,7 @@ public class TaskOverviewController {
     	
     	if(selectedTask != null) {
     		selectedTask.setAccomplished(true);
+    		showTaskDetails(selectedTask);
     	}else {
     		 // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
@@ -306,7 +307,7 @@ public class TaskOverviewController {
     private void handleNewstudent(){
     	Student tempStud = new Student();
     	Student.setNbrOfStudents(studentTable.getItems().size() + 1);
-        boolean okClicked = mainApp.showStudentEditDialog(tempStud);
+        boolean okClicked = mainApp.showStudentEditDialog(tempStud, mainApp);
         
         if (okClicked) {
         	//System.out.println(mainApp.getAllStudents());
