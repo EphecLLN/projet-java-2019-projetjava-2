@@ -35,20 +35,29 @@ public class MainApp extends Application {
         allStudents.add(new Student("Julien")); 
         allStudents.add(new Student("Robin")); 
         
-        allTasks.add(new Task("Faire le ménage", LocalDate.of(2020, 2, 21)));
+        allTasks.setAll(new Task("Faire le ménage", LocalDate.of(2020, 2, 21)),
+        				new Task("Passer l'aspirateur", LocalDate.of(2020, 6, 21)),
+        				new Task("Nettoyer la salle de bain", LocalDate.of(2019, 12, 21)),
+        				new Task("Ranger le commu", LocalDate.of(2020, 4, 21)),
+        				new Task("Nettoyer le commu", LocalDate.of(2019, 12, 10)),
+        				new Task("Faire la vaiselle", LocalDate.of(2020, 5, 21)),
+        				new Task("Nettoyer le commu", LocalDate.of(2019, 5, 21)),
+        				new Task("Faire la vaiselle", LocalDate.of(2020, 06, 21)));
+        
         allTasks.get(0).setStudent(allStudents.get(0));
-		allTasks.add(new Task("Passer l'aspirateur", LocalDate.of(2020, 6, 21)));
 		allTasks.get(1).setStudent(allStudents.get(1));
-		allTasks.add(new Task("Nettoyer la salle de bain", LocalDate.of(2019, 12, 21)));
 		allTasks.get(2).setStudent(allStudents.get(0));
-		allTasks.add(new Task("Ranger le commu", LocalDate.of(2020, 4, 21)));
 		allTasks.get(3).setStudent(allStudents.get(2));
-		allTasks.add(new Task("Nettoyer le commu", LocalDate.of(2020, 5, 21)));
 		allTasks.get(4).setStudent(allStudents.get(1));
-		allTasks.add(new Task("Faire la vaiselle", LocalDate.of(2020, 06, 21)));
 		allTasks.get(5).setStudent(allStudents.get(2));
+		allTasks.get(6).setStudent(allStudents.get(1));
+		allTasks.get(7).setStudent(allStudents.get(2));
 		
-		deleteTasksDone();
+		
+		
+		deleteTasksDone(); 
+		System.out.println(allTasks);
+		
 		
     }
 	
@@ -210,9 +219,11 @@ public class MainApp extends Application {
     }
     
     public void deleteTasksDone() {
-    	for(Task task : getAllTasks()) {
-    		if(task.timeLeft() > 0) {
-    			System.out.println(task.timeLeft());
+    	
+    	for(int i = allTasks.size() -1 ; i >= 0; i--) {
+    		if(allTasks.get(i).timeLeft() < 0) {
+    			System.out.println("task " + i + " has been delete");
+    			allTasks.remove(i);
     		}
     	}
     }
