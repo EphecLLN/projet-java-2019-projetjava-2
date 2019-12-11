@@ -134,12 +134,12 @@ public class Task{
 	 /**
      * @return result : int, le nombre de jour entre aujourd'hui et la date limite de la tache traitée
      */
-    public String timeLeft() {
+    public int timeLeft() {
     	Period intervalPeriod = Period.between(LocalDate.now(), this.getDeadLine());
     	
-    	return "Difference of days: " + intervalPeriod.getDays() +
-				"Difference of months: " + intervalPeriod.getMonths() +
-				"Difference of years: " + intervalPeriod.getYears();
+    	int daysLeft = intervalPeriod.getDays() + (intervalPeriod.getMonths() * 30) + (intervalPeriod.getYears() * 365);
+    	
+    	return daysLeft;
 		
     }
 }

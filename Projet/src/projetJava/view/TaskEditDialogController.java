@@ -5,8 +5,6 @@ package projetJava.view;
 
 
 import java.time.LocalDate;
-import java.time.Period;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

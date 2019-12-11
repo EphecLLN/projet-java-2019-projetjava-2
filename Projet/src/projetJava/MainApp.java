@@ -36,11 +36,20 @@ public class MainApp extends Application {
         allStudents.add(new Student("Robin")); 
         
         allTasks.add(new Task("Faire le ménage", LocalDate.of(2020, 2, 21)));
+        allTasks.get(0).setStudent(allStudents.get(0));
 		allTasks.add(new Task("Passer l'aspirateur", LocalDate.of(2020, 6, 21)));
+		allTasks.get(1).setStudent(allStudents.get(1));
 		allTasks.add(new Task("Nettoyer la salle de bain", LocalDate.of(2019, 12, 21)));
+		allTasks.get(2).setStudent(allStudents.get(0));
 		allTasks.add(new Task("Ranger le commu", LocalDate.of(2020, 4, 21)));
+		allTasks.get(3).setStudent(allStudents.get(2));
 		allTasks.add(new Task("Nettoyer le commu", LocalDate.of(2020, 5, 21)));
-		allTasks.add(new Task("Faire la vaiselle", LocalDate.of(2020, 06, 21)));	
+		allTasks.get(4).setStudent(allStudents.get(1));
+		allTasks.add(new Task("Faire la vaiselle", LocalDate.of(2020, 06, 21)));
+		allTasks.get(5).setStudent(allStudents.get(2));
+		
+		deleteTasksDone();
+		
     }
 	
 	/**
@@ -76,7 +85,6 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("Task management of a kot");
 		this.primaryStage.getIcons().add(new Image("file:///C:/Users/robin/git/"
 				+ "projet-java-2019-projetjava-2/resources/images/iconfinder_Note_Book_86977.png"));
-		
 		initRootLayout();
 		showTaskManagementOverview();
 	}
@@ -199,6 +207,14 @@ public class MainApp extends Application {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public void deleteTasksDone() {
+    	for(Task task : getAllTasks()) {
+    		if(task.timeLeft() > 0) {
+    			System.out.println(task.timeLeft());
+    		}
+    	}
     }
 	
 	/**
