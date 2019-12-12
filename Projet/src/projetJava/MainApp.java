@@ -2,6 +2,8 @@ package projetJava;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,8 +23,8 @@ import projetJava.view.TaskManagementOverviewController;
 public class MainApp extends Application {
 
 	private Stage primaryStage;
-	//private AnchorPane TaskManagementOverview;
-	private BorderPane rootLayout;
+	private AnchorPane TaskManagementOverview;
+	//private BorderPane rootLayout;
 	
 	private ObservableList<Task> allTasks = FXCollections.observableArrayList();
 	private ObservableList<Student> allStudents = FXCollections.observableArrayList();
@@ -53,10 +55,7 @@ public class MainApp extends Application {
 		allTasks.get(6).setStudent(allStudents.get(1));
 		allTasks.get(7).setStudent(allStudents.get(2));
 		
-		
-		
 		deleteTasksDone(); 
-		System.out.println(allTasks);
 		
 		
     }
@@ -94,14 +93,14 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("Task management of a kot");
 		this.primaryStage.getIcons().add(new Image("file:///C:/Users/robin/git/"
 				+ "projet-java-2019-projetjava-2/resources/images/iconfinder_Note_Book_86977.png"));
-		initRootLayout();
+		//initRootLayout();
 		showTaskManagementOverview();
 	}
 	
 	
 	/**
 	 * Initialise le root layout (la racine)
-	 */
+	 *
 	public void initRootLayout() {
         try {
             // charge le root layout via le ficher fxml.
@@ -116,7 +115,7 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 	/**
      * Montre la gestion des tâches (TaskManagementOverview) dans le RootLayout (mise en page)
@@ -127,15 +126,15 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/TaskManagementOverview.fxml"));
             
-            AnchorPane TaskManagementOverview = (AnchorPane) loader.load();
-            //TaskManagementOverview = (AnchorPane) loader.load();
+            //AnchorPane TaskManagementOverview = (AnchorPane) loader.load();
+            TaskManagementOverview = (AnchorPane) loader.load();
             
             // Mettre l'aperçu des tâche dans le centre du root layout.
             
-            rootLayout.setCenter(TaskManagementOverview);
-            //Scene scene = new Scene(TaskManagementOverview);
-            //primaryStage.setScene(scene);
-            //primaryStage.show();
+            //rootLayout.setCenter(TaskManagementOverview);
+            Scene scene = new Scene(TaskManagementOverview);
+            primaryStage.setScene(scene);
+            primaryStage.show();
             
             //donner l'accès de controller task à la MainApp
             TaskManagementOverviewController controllerTask = loader.getController();
@@ -219,11 +218,26 @@ public class MainApp extends Application {
     }
     
     public void deleteTasksDone() {
+    	List <Task> copie = new ArrayList<Task>(allTasks);
+    	allTasks.clear();
     	
-    	for(int i = allTasks.size() -1 ; i >= 0; i--) {
-    		if(allTasks.get(i).timeLeft() < 0) {
-    			System.out.println("task " + i + " has been delete");
-    			allTasks.remove(i);
+    	int compteurId = 1;
+    	for(int i = 0 ; i <  copie.size(); i++) {
+    		if(copie.get(i).timeLeft() >= 0) {
+    			
+    			allTasks.add(copie.get(i));
+    			copie.get(i).setId(compteurId);
+    			compteurId ++;
+    			
+    		}else {
+    			if(!copie.get(i).getAccomplished()) {
+    				allTasks.add(copie.get(i));
+    				System.out.println("Tâche : <<" + copie.get(i).getName() + ">> (pour " + copie.get(i).getStudent().getName() + ") NON ACCOMPLIE, pour le " + 
+							copie.get(i).getDeadLine() + " est dépassé!!");
+    			}else {
+    				System.out.println("Tâche : <<" + copie.get(i).getName() + ">> accomplie, pour le " + 
+    									copie.get(i).getDeadLine() + " est dépassé, a donc été supprimé!");
+    			}
     		}
     	}
     }

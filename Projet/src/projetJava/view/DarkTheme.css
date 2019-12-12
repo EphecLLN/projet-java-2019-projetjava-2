@@ -56,6 +56,10 @@
     -fx-opacity: 1;
 }
 
+.table-view .table-cell{
+    -fx-text-fill: green;
+}
+
 .table-view:focused .table-row-cell:filled:focused:selected {
     -fx-background-color: -fx-focus-color;
 }
