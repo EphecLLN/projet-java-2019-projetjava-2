@@ -90,7 +90,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {		
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Task management of a kot");
+		this.primaryStage.setTitle("MyKotManager");
 		this.primaryStage.getIcons().add(new Image("file:///C:/Users/robin/git/"
 				+ "projet-java-2019-projetjava-2/resources/images/iconfinder_Note_Book_86977.png"));
 		//initRootLayout();
