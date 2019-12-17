@@ -2,13 +2,21 @@ package projetJava;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
+import projetJava.model.Student;
+import projetJava.model.Task;
+
+//Cette classe n'est pas implémentée et donc n'est pas effective.
 
 public class ConnectionDB {
+	
+	public List<Student> studentData = new ArrayList<Student>(); 
 
-	public static void sauverEnBase(String student) {
+	public static void sauverEnBaseStudent(String name) {
 		String url = "jdbc:mysql://localhost/MyTaskManager";
 		String login = "root";
 		String passwrd = "";
@@ -24,7 +32,7 @@ public class ConnectionDB {
 			
 			//Creation d'un statement
 			st = (Statement) cn.createStatement();
-			String sql = "INSERT INTO `students` (`personne`) VALUES ('"+ student +"')"; 	
+			String sql = "INSERT INTO `students` (`name`) VALUES ('"+ name +"')"; 	
 			
 			//Exécution requête 
 			st.executeUpdate(sql); 
@@ -49,7 +57,7 @@ public class ConnectionDB {
 		
 	}
 	
-	public static void lireEnBase() {
+	public static void lireEnBaseStudent() {
 		String url = "jdbc:mysql://localhost/MyTaskManager";
 		String login = "root";
 		String passwrd = "";
@@ -73,9 +81,9 @@ public class ConnectionDB {
 			
 			//Parcour de ResultatSet
 			while (rs.next()) {
-					System.out.println(rs.getString("personne"));
+				System.out.println(rs.getString("name"));
+				
 			}
-			
 			} 
 			catch(SQLException e) {
 			e.printStackTrace();
@@ -99,8 +107,9 @@ public class ConnectionDB {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-			sauverEnBase("test");
-			lireEnBase(); 
+			//resetBaseStudent(); 
+			sauverEnBaseStudent("Robin");
+			lireEnBaseStudent(); 
 	}
 
 }
