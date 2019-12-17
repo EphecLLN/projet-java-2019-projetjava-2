@@ -3,10 +3,7 @@ package projetJava;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +19,10 @@ import projetJava.view.StudentEditDialogController;
 import projetJava.view.TaskEditDialogController;
 import projetJava.view.TaskManagementOverviewController;
 
+/**
+ * @author robin & Victor
+ *
+ */
 public class MainApp extends Application {
 
 	private Stage primaryStage;
@@ -88,7 +89,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {		
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("MyKotManager");
+		this.primaryStage.setTitle("My Kot Manager");
 		this.primaryStage.getIcons().add(new Image("file:///C:/Users/robin/git/"
 				+ "projet-java-2019-projetjava-2/resources/images/iconfinder_Note_Book_86977.png"));
 		
@@ -157,6 +158,11 @@ public class MainApp extends Application {
             return false;
         }
     }
+    /**
+     * @param student the student to edit
+     * @param mainApp the mainApp acces (pour les arrayList)
+     * @return true si t'utilisateur click sur "ok", false sinon
+     */
     public boolean showStudentEditDialog(Student student, MainApp mainApp) {
     	try {
     		// Charger le fichier fxml et créer un nouveau "stage" pour le pop up du dialog.
@@ -190,6 +196,10 @@ public class MainApp extends Application {
         }
     }
     
+    /**
+     * Supprime les tâches qui sont faites et qui sont dépassés, celle qui sont dépassés mais non faites, recevrons
+     * une alerte en console lors du chargement de l'application
+     */
     public void deleteTasksDone() {
     	List <Task> copie = new ArrayList<Task>(allTasks);
     	allTasks.clear();

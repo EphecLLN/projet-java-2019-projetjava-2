@@ -21,7 +21,7 @@ import projetJava.model.Task;
 import projetJava.util.DateUtil;
 
 /**
- * @author robin
+ * @author robin & Victor
  *
  */
 public class TaskManagementOverviewController {
@@ -57,7 +57,7 @@ public class TaskManagementOverviewController {
 	@FXML
 	private TableColumn<Student, String> NameColumnStud;
 	
-    // Reference to the main application.
+    // Reference vers la main application.
     private MainApp mainApp;
 
     /**
@@ -82,8 +82,8 @@ public class TaskManagementOverviewController {
 	}
 	
     /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
+     * Initialise la classe de contrôleur. 
+     * Cette méthode est automatiquement appelée après le chargement du fichier fxml.
      */
     @FXML
     private void initialize() {
@@ -114,14 +114,14 @@ public class TaskManagementOverviewController {
     }
 
     /**
-     * Is called by the main application to give a reference back to itself.
+     * Est appelé par l'application principale pour se renvoyer une référence.
      * 
      * @param mainApp
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 
-        // Add observable list data to the table
+        // Ajoute les données de l'observalbe list dans les table
         taskTable.setItems(mainApp.getAllTasks());
         studentTable.setItems(mainApp.getAllStudents());
     }
@@ -134,7 +134,7 @@ public class TaskManagementOverviewController {
      */
     private void showTaskDetails(Task task) {
         if (task != null) {
-            // Fill the labels with info from the person object.
+            // Rempli les labels avec les infos de l'objet Task.
         	idLabel.setText(Integer.toString(task.getId()));
         	NameLabel.setText(task.getName());
         	
@@ -146,7 +146,7 @@ public class TaskManagementOverviewController {
         	deadlineLabel.setText(DateUtil.format(task.getDeadLine()));
         	accomplishedLabel.setText(Boolean.toString(task.getAccomplished()));
         } else {
-            // Person is null, remove all the text.
+            // Task est null, retirer tout les textes.
         	idLabel.setText("");
         	NameLabel.setText("");
         	studentLabel.setText("");
@@ -155,6 +155,9 @@ public class TaskManagementOverviewController {
         }
     }
     
+    /**
+     * Si une tâche est sélectionné dans le tableau et que l'utilisateur click sur Delete, alors celle-ci est supprimé
+     */
     @FXML
     private void handleDeleteTask() {
     	//On regarde quel SelectionModel il a choisi puis on prend l'index, et après cela on remove dans l'arrayList
@@ -178,7 +181,7 @@ public class TaskManagementOverviewController {
         	}
             
         } else {
-            // Nothing selected.
+            // Si rien n'est sélectionné.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
@@ -192,7 +195,6 @@ public class TaskManagementOverviewController {
     /**
      * Appelez lorsque l'utilisateur appuie sur le boutton "nouveau"
      * Ouvre une interface pour editer les détails d'une tâche.
-     * @throws DateTempsRestantInvalideException 
      */
     @FXML
     private void handleNewTask(){
@@ -207,8 +209,8 @@ public class TaskManagementOverviewController {
     }
 
     /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
+     * Appelé lorsque l'utilisateur clique sur le bouton Edit. 
+     * Ouvre une boîte de dialogue pour modifier le détails pour la Task sélectionnée.
      */
     @FXML
     private void handleEditTask() {
@@ -220,7 +222,7 @@ public class TaskManagementOverviewController {
             }
 
         } else {
-            // Nothing selected.
+            // Si rien n'est sélectionné.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
@@ -231,6 +233,10 @@ public class TaskManagementOverviewController {
         }
     }
     
+    /**
+     * Si une tâche est sélectionnée dans le tablea et qu'elle n'est pas accomplie, elle devient donc accomplie
+     * et Inversément si elle l'était déjà ( au cas ou l'utilisateur ferait une mauvaise manip)
+     */
     @FXML
     private void handleAccomplishTask() {
     	Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
@@ -243,7 +249,7 @@ public class TaskManagementOverviewController {
     		}
     		showTaskDetails(selectedTask);
     	}else {
-    		 // Nothing selected.
+    		 //  Si rien n'est sélectionné.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
@@ -253,6 +259,9 @@ public class TaskManagementOverviewController {
             alert.showAndWait();
     	}
     }
+    /**
+     *  affiche 3 lignes de textes dans la zone "ShowDetailsTask" et montre le nombre de jours/mois/année restant d'une tâche.
+     */
     @FXML
     private void handleTimeLeft() {
     	Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
@@ -266,6 +275,9 @@ public class TaskManagementOverviewController {
     	}
     }
     
+    /**
+     * Si un Etudiant est sélectionné dans le tableau et que l'utilisateur click sur Delete, alors cellui-ci est supprimé.
+     */
     @FXML
     private void handleDeleteStudent() {
     	//On regarde quel SelectionModel il a choisi puis on prend l'index, et après cela on remove dans l'arrayList
@@ -289,7 +301,7 @@ public class TaskManagementOverviewController {
         	}
             
         } else {
-            // Nothing selected.
+            //  Si rien n'est sélectionné.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
