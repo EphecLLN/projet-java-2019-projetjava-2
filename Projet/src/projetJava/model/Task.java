@@ -31,6 +31,9 @@ public class Task implements Comparable<Task>{
 		this(null);
 		
 	}
+	/**
+	 * @param name, the name of the task
+	 */
 	public Task(String name) {
 		nbrOfTasks ++;
 		this.name = new SimpleStringProperty(name);
@@ -40,6 +43,10 @@ public class Task implements Comparable<Task>{
         this.deadLine = new SimpleObjectProperty<LocalDate>(null);
 	}
 	
+	/**
+	 * @param name: String the name of the taks
+	 * @param deadLine : LocalDate the deadline of the date
+	 */
 	public Task(String name, LocalDate deadLine) {
 		nbrOfTasks ++;
 		this.name = new SimpleStringProperty(name);
@@ -50,62 +57,107 @@ public class Task implements Comparable<Task>{
 	}
 
 	//------------------------------------GETTERS SETTERS------------------------------------------//
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return this.id.get();
 	}
 	
+	/**
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id.set(id);
 	}
 	
+	/**
+	 * @return the Property Id
+	 */
 	public IntegerProperty idProperty() {
 		return this.id;
 	}
 	
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return this.name.get();
 	}
 	
+	/**
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name.set(name);
 	}
 	
+	/**
+	 * @return return the PropertyName
+	 */
 	public StringProperty nameProperty() {
 		return this.name;
 	}
 	
+	/**
+	 * @return the Student
+	 */
 	public Student getStudent() {
 		return student.get();
 	}
 	
+	/**
+	 * @param student
+	 */
 	public void setStudent(Student student) {
 		this.student.set(student);
 	}
 	
+	/**
+	 * @return the propertyStudent
+	 */
 	public ObjectProperty<Student> studentProperty(){
 		return student;
 	}
 	
+	/**
+	 * @return the deadLine
+	 */
 	public LocalDate getDeadLine() {
 		return deadLine.get();
 	}
 	
+	/**
+	 * @param deadline
+	 */
 	public void setDeadLine(LocalDate deadline) {
 		this.deadLine.set(deadline);
 	}
 	
+	/**
+	 * @return the localDateProperty
+	 */
 	public ObjectProperty<LocalDate> localDateProperty(){
 		return deadLine;
 	}
 	
+	/**
+	 * @return true if the task is accomplished, else false 
+	 */
 	public boolean getAccomplished() {
 		return this.accomplished.get();
 	}
 	
+	/**
+	 * @param accomplished
+	 */
 	public void setAccomplished(boolean accomplished) {
 		this.accomplished.set(accomplished);
 	}
 	
+	/**
+	 * @return true if the task is accomplished, else false
+	 */
 	public BooleanProperty accomplishedProperty() {
 		return this.accomplished;
 	}

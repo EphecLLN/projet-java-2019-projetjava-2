@@ -9,6 +9,10 @@ import projetJava.MainApp;
 import projetJava.model.Student;
 
 
+/**
+ * @author robin & Victor
+ *
+ */
 public class StudentEditDialogController {
 
 	@FXML
@@ -28,7 +32,8 @@ public class StudentEditDialogController {
     }
     
     /**
-     * Sets the stage of this dialog.
+     * Définit le "stage" de cette boîte de dialogue.
+
      *
      * @param dialogStage
      */
@@ -70,7 +75,7 @@ public class StudentEditDialogController {
     	}
     }
     /**
-     * Called when the user clicks cancel.
+     * Appelé quand l'utilisateur click sur cancel.
      */
     @FXML
     private void handleCancel() {
@@ -107,25 +112,5 @@ public class StudentEditDialogController {
 
             return false;
         }
-    }
-    
-    
+    }   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

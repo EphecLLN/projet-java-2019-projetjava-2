@@ -17,7 +17,7 @@ import projetJava.util.DateUtil;
 
 
 /**
- * @author robin
+ * @author robin & Victor
  *
  */
 public class TaskEditDialogController {
