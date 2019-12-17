@@ -61,21 +61,20 @@ public class TaskManagementOverviewController {
     private MainApp mainApp;
 
     /**
-     * The constructor.
      * The constructor is called before the initialize() method.
      */
     public TaskManagementOverviewController() {
     }
 
     /**
-	 * @return the taskTable
+	 * @return the taskTable : la table des tâches 
 	 */
 	public TableView<Task> getTaskTable() {
 		return taskTable;
 	}
 	
 	/**
-	 * @return the studentTable
+	 * @return the studentTable : la table des etudiants 
 	 */
 	public TableView<Student> getStudentTable() {
 		return studentTable;
@@ -259,6 +258,7 @@ public class TaskManagementOverviewController {
             alert.showAndWait();
     	}
     }
+    
     /**
      *  affiche 3 lignes de textes dans la zone "ShowDetailsTask" et montre le nombre de jours/mois/année restant d'une tâche.
      */
@@ -312,6 +312,7 @@ public class TaskManagementOverviewController {
         }
     	
     }
+    
     /**
      * Appelez lorsque l'utilisateur appuie sur le boutton "New"
      * Ouvre une interface pour editer les détails d'un étudiant.

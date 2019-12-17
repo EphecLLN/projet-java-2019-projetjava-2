@@ -17,7 +17,6 @@ public class StudentEditDialogController {
 
 	@FXML
 	private TextField nameField;
-	
 	private Stage dialogStage;
 	private Student student;
 	private boolean okClicked = false;
@@ -33,8 +32,7 @@ public class StudentEditDialogController {
     
     /**
      * Définit le "stage" de cette boîte de dialogue.
-
-     *
+     * 
      * @param dialogStage
      */
     public void setDialogStage(Stage dialogStage) {
@@ -64,6 +62,7 @@ public class StudentEditDialogController {
     
     /**
      * Appelé quand l'utilisateur click sur OK
+     * Ferme la boite de dialogue après avoir cliqué sur ok
      */
     @FXML
     private void handleOk() {
@@ -74,8 +73,10 @@ public class StudentEditDialogController {
         	dialogStage.close();
     	}
     }
+    
     /**
      * Appelé quand l'utilisateur click sur cancel.
+     * Ferme la boite de dialogue quand l'utilisateur clique sur cancel
      */
     @FXML
     private void handleCancel() {
@@ -85,7 +86,8 @@ public class StudentEditDialogController {
     /**
      * Valide les "input" inséré par l'utilisateur
      *
-     * @return true Si les input sont valide
+     * @return true Si les input sont valides
+     * @return false Si les input ne passent pas les tests
      */
     private boolean isInputValid() {
     	String errorMessage = "";

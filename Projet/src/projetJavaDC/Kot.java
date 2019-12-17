@@ -25,6 +25,7 @@ public class Kot {
 	protected ArrayList<String> event;
 	
 	//--------------------------------------CONSTRUCTEURS-------------------------------------------
+	
 	/**
 	 * Constructeur qui créé un nouveau kot sur base de son nom
 	 * @param nomKot : le nom du kot à créer, se fait lors de l'inscription de l'etudiant

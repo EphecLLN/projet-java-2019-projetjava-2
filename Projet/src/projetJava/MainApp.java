@@ -20,7 +20,7 @@ import projetJava.view.TaskEditDialogController;
 import projetJava.view.TaskManagementOverviewController;
 
 /**
- * @author robin & Victor
+ * @author Robin & Victor
  *
  */
 public class MainApp extends Application {
@@ -60,31 +60,30 @@ public class MainApp extends Application {
     }
 	
 	/**
-	 * @return the allTasks
+	 * @return the allTasks : la liste des tâches à faire 
 	 */
 	public ObservableList<Task> getAllTasks() {
 		return allTasks;
 	}
 	
 	/**
-	 * @return the allStudents
+	 * @return the allStudents : la liste des etudiants
 	 */
 	public ObservableList<Student> getAllStudents() {
 		return allStudents;
 	}
 
-	/**
-     * Returns the main stage.
-     * @return
+	/** 
+     * @return the main stage
      */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
 	/**
-	 * Lors du run, la méthode start est appelez, elle même appelle le initRootLayout 
-	 * et le showTaskManagementOverview.
-	 * Et défini l'icon de l'application
+	 * Lors du run, la méthode start est appelé, elle même appelle la méthode initRootLayout() 
+	 * et la showTaskManagementOverview().
+	 * Et défini l'icone de l'application
 	 */
 	@Override
 	public void start(Stage primaryStage) {		
@@ -121,7 +120,7 @@ public class MainApp extends Application {
     
     /**
      * Ouvre une fenêtre pour écrire les détails spécifique d'une tâche.
-     * Si l'utilisateut click sur ok les détails sont sauvé dans l'objet Tache
+     * Si l'utilisateur click sur ok, les détails sont sauvés dans l'objet Tache
      * et renvoie true
      *
      * @param Task the task to edit
@@ -158,10 +157,11 @@ public class MainApp extends Application {
             return false;
         }
     }
+    
     /**
-     * @param student the student to edit
-     * @param mainApp the mainApp acces (pour les arrayList)
-     * @return true si t'utilisateur click sur "ok", false sinon
+     * @param student : l'etudiant à editer 
+     * @param mainApp : l'access à la mainApp(pour les arrayList)
+     * @return true si l'utilisateur click sur "ok", false sinon
      */
     public boolean showStudentEditDialog(Student student, MainApp mainApp) {
     	try {

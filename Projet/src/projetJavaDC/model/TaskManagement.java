@@ -9,7 +9,7 @@ import java.util.Observable;
 import projetJavaDC.DateTempsRestantInvalideException;
 
 /**
- * @author robin
+ * @author robin & victor 
  *
  */
 public class TaskManagement extends Observable{
@@ -26,6 +26,11 @@ public class TaskManagement extends Observable{
 	public TaskManagement() {
 		
 	}
+	
+	
+	/**
+	 * @param currentStudent
+	 */
 	public TaskManagement(Student currentStudent) {
 		this.currentStudent = currentStudent;
 	}

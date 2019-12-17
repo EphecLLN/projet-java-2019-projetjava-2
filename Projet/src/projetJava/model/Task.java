@@ -24,13 +24,15 @@ public class Task implements Comparable<Task>{
 	
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
+	
 	/**
-	 * constructeur par défaut
+	 * constructeur par défault
 	 */
 	public Task() {
 		this(null);
 		
 	}
+	
 	/**
 	 * @param name, the name of the task
 	 */
@@ -44,7 +46,7 @@ public class Task implements Comparable<Task>{
 	}
 	
 	/**
-	 * @param name: String the name of the taks
+	 * @param name: String the name of the task
 	 * @param deadLine : LocalDate the deadline of the date
 	 */
 	public Task(String name, LocalDate deadLine) {
@@ -176,6 +178,7 @@ public class Task implements Comparable<Task>{
 		Task.nbrOfTasks = nbrOfTasks;
 	}
 	//--------------------------------------TO STRING----------------------------------------------//
+	
 	@Override
 	public String toString() {  
 		return "Task " + getId() + ": " + name + 
@@ -188,10 +191,11 @@ public class Task implements Comparable<Task>{
 	public int compareTo(Task task) {
 		return this.getDeadLine().compareTo(task.getDeadLine());
 	}
+	
 	//--------------------------------------METHODES-----------------------------------------------//
 	
 	 /**
-     * @return result : int, le nombre de jour entre aujourd'hui et la date limite de la tache traitée
+     * @return result : int, la différence de jour entre aujourd'hui et la deadline
      */
     public int timeLeft() {
     	Period intervalPeriod = Period.between(LocalDate.now(), this.getDeadLine());

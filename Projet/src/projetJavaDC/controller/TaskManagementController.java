@@ -8,6 +8,10 @@ import projetJavaDC.model.Task;
 import projetJavaDC.model.TaskManagement;
 import projetJavaDC.view.TaskManagementVue;
 
+/**
+ * @author vic91
+ *
+ */
 public class TaskManagementController {
 	
 	private TaskManagement model = null;	
@@ -20,6 +24,12 @@ public class TaskManagementController {
 	//------------------------------------Method------------------------------------------------//
 	
 	
+	/**
+	 * @param taskName le nom de la tâche 
+	 * @param deadline la date limite pour effectuer la tache 
+	 * @param stud l'etudiant 
+	 * @throws projetJavaDC.DateTempsRestantInvalideException
+	 */
 	public void addTask(String taskName, Date deadline, Student stud) throws projetJavaDC.DateTempsRestantInvalideException {
 		if(model != null) {
 			try {
@@ -34,6 +44,11 @@ public class TaskManagementController {
 	}
 
 	
+	/**
+	 * @param taskId
+	 * @return le temps restant sur base de l'id tache 
+	 * @return -1 Dans le cas ou la tâche n'a pas été trouvé 
+	 */
 	public int timeLeft(int taskId) {
 		if(model != null) {
 			for(Task task : TaskManagement.getAllTasks()) {
@@ -43,9 +58,13 @@ public class TaskManagementController {
 				}
 			}
 		}
-		return -1; //Dans le cas ou la tâche n'a pas été trouvé 
+		return -1;
 	}
 	
+	
+	/**
+	 * @param id l'id de la tache à accomplir 
+	 */
 	public void accomplishTaskStudent(int id) {
 		boolean test = false;
 		boolean test2 = false;
@@ -73,7 +92,12 @@ public class TaskManagementController {
 		}
 	}
 	
-	//Pas utilisé pour le moment
+	
+		/**
+		 * !!Cette methode n'est pas effective!!
+		 * @param id l'id de login 
+		 * @return false si la connexion n'a pas pu se faire 
+		 */
 		public boolean login(int id){
 			if(model != null) {
 				return model.login(id);
@@ -81,6 +105,9 @@ public class TaskManagementController {
 			return false;
 		}
 	
+	/**
+	 * @param vue la vue de taskManagement
+	 */
 	public void addView(TaskManagementVue vue) {
 		this.vue = vue;
 	}
