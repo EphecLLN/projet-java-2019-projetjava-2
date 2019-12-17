@@ -151,7 +151,9 @@ public class TaskEditDialogController {
     /**
      * Valide les "input" inséré par l'utilisateur
      *
-     * @return true Si les input sont valide
+     * @return true Si les input sont valides. Le champ doit être non null, la date valide, une deadline valide,
+     * 
+     * @return false Si les input ne passent pas les test
      */
     private boolean isInputValid() {
         String errorMessage = "";

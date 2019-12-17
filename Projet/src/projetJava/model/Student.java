@@ -13,14 +13,16 @@ public class Student{
 	private static int nbrOfStudents;
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
+	
 	/**
-	 * the default constructor
+	 * Constructeur par default de l'objet Student
 	 */
 	public Student () { 
 		this(null); 
 	}
+	
 	/**
-	 * @param name the name of the Student
+	 * @param name le nom de l'etudiant
 	 */
 	public Student(String name){
 		nbrOfStudents ++;
@@ -30,6 +32,7 @@ public class Student{
 	}
 	
 	//------------------------------------GETTERS SETTERS------------------------------------------//
+	
 	/**
 	 * @return the id
 	 */

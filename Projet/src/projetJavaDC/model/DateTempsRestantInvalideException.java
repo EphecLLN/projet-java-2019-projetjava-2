@@ -4,7 +4,7 @@
 package projetJavaDC.model;
 
 /**
- * @author robin
+ * @author robin & victor 
  *
  */
 public class DateTempsRestantInvalideException extends Exception {
