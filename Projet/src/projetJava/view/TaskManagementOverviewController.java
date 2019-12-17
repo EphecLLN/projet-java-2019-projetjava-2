@@ -101,17 +101,16 @@ public class TaskManagementOverviewController {
         
         
         /*
-         * Pour être informé quand l’utilisateur sélectionne une tâche dans la tableau , nous avons besoin d’écouter les changements.
-           Il y a une interface dans JavaFX appelée ChangeListener comprenant une méthode nommé changed(...). Cette méthode possède 
-           trois paramètres: observable, oldValue, et newValue.
-		   Création d'un ChangeListener via les expressions lambda introduite dans Java 8.
+         * Pour savoir quand une valeur est sélectionnée dans une TableView, 
+         * il faut récupérer le modèle de sélection dans la table en invoquant sa méthode getSelectionModel() 
+         * et écouter les changements de valeur de sa propriété selectedIndex ou selectedItem avec écouteur de 
+         * type InvalidationListener ou un ChangeListener.
          * 
          */
         
         //Faire attention lorsqu'il y a des changement et regarder le détail de la tâche quand ça change
         taskTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showTaskDetails(newValue));
-       
     }
 
     /**
@@ -200,9 +199,7 @@ public class TaskManagementOverviewController {
         Task tempTask = new Task();
         Task.setNbrOfTasks(taskTable.getItems().size() + 1);
         
-        
-        
-        boolean okClicked = mainApp.showTaskEditDialog(tempTask, this.mainApp);
+        boolean okClicked = mainApp.showTaskEditDialog(tempTask, mainApp);
         if (okClicked) {
             mainApp.getAllTasks().add(tempTask);
            
@@ -239,7 +236,11 @@ public class TaskManagementOverviewController {
     	Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
     	
     	if(selectedTask != null) {
-    		selectedTask.setAccomplished(true);
+    		if(selectedTask.getAccomplished()) {
+    			selectedTask.setAccomplished(false);
+    		}else {
+    			selectedTask.setAccomplished(true);
+    		}
     		showTaskDetails(selectedTask);
     	}else {
     		 // Nothing selected.
@@ -307,6 +308,7 @@ public class TaskManagementOverviewController {
     private void handleNewstudent(){
     	Student tempStud = new Student();
     	Student.setNbrOfStudents(studentTable.getItems().size() + 1);
+    	
         boolean okClicked = mainApp.showStudentEditDialog(tempStud, mainApp);
         
         if (okClicked) {

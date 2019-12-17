@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 
-public class Task{
+public class Task implements Comparable<Task>{
 
 	private IntegerProperty id;
 	private StringProperty name;
@@ -24,6 +24,9 @@ public class Task{
 	
 	
 	//--------------------------------------CONSTRUCTEURS------------------------------------------//
+	/**
+	 * constructeur par défaut
+	 */
 	public Task() {
 		this(null);
 		
@@ -129,6 +132,10 @@ public class Task{
 				"\t Accomplish= " + this.getAccomplished() + "\n";
 	}
 
+	@Override 
+	public int compareTo(Task task) {
+		return this.getDeadLine().compareTo(task.getDeadLine());
+	}
 	//--------------------------------------METHODES-----------------------------------------------//
 	
 	 /**
@@ -142,4 +149,5 @@ public class Task{
     	return daysLeft;
 		
     }
+    
 }

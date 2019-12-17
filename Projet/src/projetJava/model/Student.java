@@ -78,6 +78,7 @@ public class Student{
 	public static int getNbrOfStudents() {
 		return nbrOfStudents;
 	}
+	
 	/**
 	 * @param nbrOfStudents the number Of Students to set
 	 */

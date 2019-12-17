@@ -3,7 +3,10 @@ package projetJava;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import projetJava.model.Student;
@@ -24,8 +26,8 @@ public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private AnchorPane TaskManagementOverview;
-	//private BorderPane rootLayout;
 	
+	/* Utilisation d'un observableArrayList car celui-ci permet d'écouter les changements*/
 	private ObservableList<Task> allTasks = FXCollections.observableArrayList();
 	private ObservableList<Student> allStudents = FXCollections.observableArrayList();
 	
@@ -41,9 +43,9 @@ public class MainApp extends Application {
         				new Task("Passer l'aspirateur", LocalDate.of(2020, 6, 21)),
         				new Task("Nettoyer la salle de bain", LocalDate.of(2019, 12, 21)),
         				new Task("Ranger le commu", LocalDate.of(2020, 4, 21)),
-        				new Task("Nettoyer le commu", LocalDate.of(2019, 12, 10)),
+        				new Task("Nettoyer le commu", LocalDate.of(2019, 12, 10)),//past
         				new Task("Faire la vaiselle", LocalDate.of(2020, 5, 21)),
-        				new Task("Nettoyer le commu", LocalDate.of(2019, 5, 21)),
+        				new Task("Nettoyer le commu", LocalDate.of(2019, 5, 21)),//past
         				new Task("Faire la vaiselle", LocalDate.of(2020, 06, 21)));
         
         allTasks.get(0).setStudent(allStudents.get(0));
@@ -51,13 +53,9 @@ public class MainApp extends Application {
 		allTasks.get(2).setStudent(allStudents.get(0));
 		allTasks.get(3).setStudent(allStudents.get(2));
 		allTasks.get(4).setStudent(allStudents.get(1));
-		allTasks.get(5).setStudent(allStudents.get(2));
 		allTasks.get(6).setStudent(allStudents.get(1));
-		allTasks.get(7).setStudent(allStudents.get(2));
 		
-		deleteTasksDone(); 
-		
-		
+		deleteTasksDone(); 	
     }
 	
 	/**
@@ -93,29 +91,9 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("Task management of a kot");
 		this.primaryStage.getIcons().add(new Image("file:///C:/Users/robin/git/"
 				+ "projet-java-2019-projetjava-2/resources/images/iconfinder_Note_Book_86977.png"));
-		//initRootLayout();
+		
 		showTaskManagementOverview();
 	}
-	
-	
-	/**
-	 * Initialise le root layout (la racine)
-	 *
-	public void initRootLayout() {
-        try {
-            // charge le root layout via le ficher fxml.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
-            
-            // Affiche la scène contenant la disposition racine.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 	/**
      * Montre la gestion des tâches (TaskManagementOverview) dans le RootLayout (mise en page)
@@ -126,12 +104,8 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/TaskManagementOverview.fxml"));
             
-            //AnchorPane TaskManagementOverview = (AnchorPane) loader.load();
             TaskManagementOverview = (AnchorPane) loader.load();
             
-            // Mettre l'aperçu des tâche dans le centre du root layout.
-            
-            //rootLayout.setCenter(TaskManagementOverview);
             Scene scene = new Scene(TaskManagementOverview);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -165,6 +139,7 @@ public class MainApp extends Application {
             dialogStage.setTitle("Edit Task");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
+            
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             
@@ -172,13 +147,11 @@ public class MainApp extends Application {
             TaskEditDialogController controllerTask = loader.getController();
             
             controllerTask.setDialogStage(dialogStage);
-            
             controllerTask.setTask(task, mainApp);
             
             // Affiche la boîte de dialogue et attend que l'utilisateur la ferme.
             dialogStage.showAndWait();
-            return controllerTask.isOkClicked();
-            
+            return controllerTask.isOkClicked(); 
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -194,9 +167,9 @@ public class MainApp extends Application {
         	// Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Student");
-            
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
+            
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             
@@ -232,8 +205,13 @@ public class MainApp extends Application {
     		}else {
     			if(!copie.get(i).getAccomplished()) {
     				allTasks.add(copie.get(i));
-    				System.out.println("Tâche : <<" + copie.get(i).getName() + ">> (pour " + copie.get(i).getStudent().getName() + ") NON ACCOMPLIE, pour le " + 
-							copie.get(i).getDeadLine() + " est dépassé!!");
+    				copie.get(i).setId(compteurId);
+        			compteurId ++;
+        			System.out.println("Tâche : <<" + copie.get(i).getName() + ">> (pour " + 
+        							copie.get(i).getStudent().getName() + ") NON ACCOMPLIE, pour le " + 
+        							copie.get(i).getDeadLine() + " est dépassé!!");
+        			
+    				
     			}else {
     				System.out.println("Tâche : <<" + copie.get(i).getName() + ">> accomplie, pour le " + 
     									copie.get(i).getDeadLine() + " est dépassé, a donc été supprimé!");

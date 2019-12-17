@@ -55,6 +55,7 @@ public class TaskEditDialogController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
+    
     /**
      * Sets the Task to be edited in the dialog.
      *
@@ -62,7 +63,10 @@ public class TaskEditDialogController {
      */
     public void setTask(Task task, MainApp mainApp) {
         this.task = task;
+        //System.out.println(mainApp.getAllTasks());
         this.mainApp = mainApp;
+        
+        idField.setEditable(false);
         
         if(task.getName() == null) {
         	idField.setText(Integer.toString(Task.getNbrOfTasks()));
@@ -82,6 +86,7 @@ public class TaskEditDialogController {
         	deadlineField.setText(DateUtil.format(task.getDeadLine()));
         	//deadlineField.setPromptText("dd/mm/yyyy");
         }
+        accomplishedField.setEditable(false);
         accomplishedField.setText(Boolean.toString(task.getAccomplished()));
     }
 
@@ -154,14 +159,15 @@ public class TaskEditDialogController {
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "No valid name!\n";
         }
-
+        
         boolean testDateValide = true;
         
         if(deadlineField.getText() == null || deadlineField.getText().length() == 0) {
         	errorMessage += "No valid deadline!\n";
+        	testDateValide = false;
         }else {
         	if(!DateUtil.validDate(deadlineField.getText())) {
-        		errorMessage += "No valid deadline. Use the format dd.mm.yyyy!\n";
+        		errorMessage += "No valid deadline. Use the format dd/mm/yyyy!\n";
         		testDateValide = false;
         	}
         }
@@ -175,8 +181,8 @@ public class TaskEditDialogController {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Montrer le message d'erreur
-            Alert alert = new Alert(AlertType.ERROR);
+        	// Montrer le message d'erreur
+        	Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");

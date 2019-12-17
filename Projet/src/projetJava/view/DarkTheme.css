@@ -57,7 +57,7 @@
 }
 
 .table-view .table-cell{
-    -fx-text-fill: green;
+    -fx-text-fill: white;
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
